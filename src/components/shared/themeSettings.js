@@ -4,6 +4,28 @@ const themeSettings = {
     main: '#fefefe',
     footer: '#475569',
   },
+  mixins: {
+    gridMixin: (cols, rows, align, justify) => {
+      return `
+    display: grid;
+    grid-template-columns: ${cols};
+    grid-template-rows: ${rows};
+    align-items: ${align};
+    justify-items: ${justify}`;
+    },
+    flexMixin: (justify, align, dir) => {
+      return `
+      display: flex;
+      justify-content: ${justify};
+      align-items: ${align}
+      flex-direction: ${dir}`;
+    },
+    maxContainer: () => {
+      return `
+      width: 100%;
+      height: 100%;`;
+    },
+  },
   breakpoints: {
     portrait: {
       phoneSmall: '280px',
