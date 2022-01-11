@@ -11,15 +11,21 @@ const inputAppear = keyframes`
   }`;
 
 export const Input = styled.input`
-  padding: 0.2rem 2.5rem;
-  border-radius: 1rem;
-  border: 1px solid #475569;
-  outline: none;
   animation: ${inputAppear} 200ms ease-in-out;
+  ${({ theme: { mixins } }) => mixins.inputStyle()}
 
   &:focus {
     border-color: #57b7df;
   }
+`;
+
+export const ImgInput = styled(Input)`
+  padding: 0;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  opacity: 0;
+  cursor: pointer;
 `;
 
 export const Label = styled.label`
