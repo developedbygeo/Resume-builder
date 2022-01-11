@@ -5,13 +5,11 @@ const themeSettings = {
     footer: '#475569',
   },
   mixins: {
-    gridMixin: (cols, rows, align, justify) => {
+    gridMixin: (cols, rows) => {
       return `
     display: grid;
     grid-template-columns: ${cols};
-    grid-template-rows: ${rows};
-    align-items: ${align};
-    justify-items: ${justify}`;
+    grid-template-rows: ${rows};`;
     },
     flexMixin: (justify, align, dir) => {
       return `
@@ -24,6 +22,17 @@ const themeSettings = {
       return `
       width: 100%;
       height: 100%;`;
+    },
+    inputStyle: () => {
+      return `
+      padding: 0.7rem 2.5rem;
+      border: none;
+      border-bottom: 1px solid #475569;
+      border-radius: 1rem;
+      outline: none;
+      color: #191E24;
+-webkit-box-shadow:rgba(0, 0, 0, 0.3) 1.95px 1.95px 2.6px;
+box-shadow: rgba(0, 0, 0, 0.3) 1.95px 1.95px 2.6px;`;
     },
   },
   breakpoints: {
