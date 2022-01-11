@@ -15,7 +15,7 @@ const GlobalStyle = createGlobalStyle`
 html {
   font-size: 62.5%;
   @media ${devices.phoneStandard}{
-    font-size: 30%;
+    font-size: 35%;
   }
 }
 
@@ -28,10 +28,11 @@ body {
 main {
   width: 100vw;
   height: 90vh;
+  max-height: auto;
   background: #eee;
 }
 h1 {
-  font-size: 3.2rem;
+  font-size: 2.8rem;
   font-weight: 700;
 
 }
@@ -45,7 +46,7 @@ h3 {
 }
 
 h1, h2, h3{
-font-family: 'Lora', serif;
+font-family: 'Montserrat', sans-serif;
 }
 p,
 button,
