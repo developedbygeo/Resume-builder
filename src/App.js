@@ -1,25 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import { ThemeProvider } from 'styled-components';
+import themeSettings from './components/shared/themeSettings';
+import GlobalStyle from './components/shared/globalStyles';
+import Header from './components/Header/Header';
+import Personal from './components/Personal/Personal';
+import { LayoutContainer } from './components/shared/Container.styled';
+import Contact from './components/Contact/Contact';
+import Employment from './components/Employment/Employment';
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={themeSettings}>
+      <>
+        <GlobalStyle />
+        <Header />
+        <main>
+          <LayoutContainer>
+            <Personal />
+            <Contact />
+            <Employment />
+          </LayoutContainer>
+        </main>
+      </>
+    </ThemeProvider>
   );
-}
+};
 
 export default App;
