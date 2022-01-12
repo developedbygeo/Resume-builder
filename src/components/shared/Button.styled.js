@@ -13,6 +13,7 @@ export const Button = styled.button`
   width: ${({ buttonWidth }) => buttonWidth || 'auto'};
   background: ${({ buttonBg }) => buttonBg || 'inherit'};
   color: ${({ buttonClr }) => buttonClr || 'white'};
+  align-self: ${({ alignSelf }) => alignSelf || 'inherit'};
 
   &:hover {
     transform: scale(1.05);
@@ -20,16 +21,27 @@ export const Button = styled.button`
 `;
 
 export const CtaButton = styled(Button)`
-  background: #31b1d8;
+  background: ${({ theme }) => theme.colors.cta.standard};
 
   &:hover {
-    background: #218bab;
+    background: ${({ theme }) => theme.colors.cta.hover};
   }
 `;
 
 export const SecondaryButton = styled(Button)`
-  background: #475569;
+  background: ${({ theme }) => theme.colors.secondary.standard};
   &:hover {
-    background: #323b49;
+    background: ${({ theme }) => theme.colors.secondary.hover};
+  }
+`;
+export const AddMoreDetails = styled(Button)`
+  background: transparent;
+  box-shadow: 0;
+  margin-block: 2rem;
+  color: #1d3557;
+  box-shadow: none;
+  &:hover {
+    color: #31b1d8;
+    transform: none;
   }
 `;
