@@ -1,8 +1,10 @@
 const themeSettings = {
   colors: {
     header: '#f9f6f6',
-    main: '#fefefe',
+    main: '#fdfcfe ',
     footer: '#475569',
+    cta: { standard: '#31b1d8', hover: '#218bab' },
+    secondary: { standard: '#475569', hover: '#323b49' },
   },
   mixins: {
     gridMixin: (cols, rows) => {
@@ -25,14 +27,12 @@ const themeSettings = {
     },
     inputStyle: () => {
       return `
-      padding: 0.7rem 2.5rem;
+      padding: 1rem 2.5rem;
       border: none;
-      border-bottom: 1px solid #475569;
-      border-radius: 1rem;
       outline: none;
-      color: #191E24;
--webkit-box-shadow:rgba(0, 0, 0, 0.3) 1.95px 1.95px 2.6px;
-box-shadow: rgba(0, 0, 0, 0.3) 1.95px 1.95px 2.6px;`;
+      color: 'black';
+      background: #E2E9F4;
+      `;
     },
   },
   breakpoints: {
