@@ -14,6 +14,7 @@ const StyledForm = styled.form`
   input::placeholder,
   textarea::placeholder {
     font-size: 1.6rem;
+    font-family: 'Montserrat', sans-serif;
   }
 
   & > button {
