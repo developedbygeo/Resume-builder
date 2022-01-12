@@ -1,6 +1,4 @@
 import styled, { css } from 'styled-components';
-import { devices } from '../shared/themeSettings';
-import Button from '../shared/Button.styled';
 
 const defaultSettings = css`
   height: 100%;
@@ -13,8 +11,7 @@ export const Nav = styled.nav`
 
   & > div {
     ${defaultSettings}
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    ${({ theme: { mixins } }) => mixins.gridMixin('repeat(2, 1fr)', '1fr')};
     gap: 1rem;
     align-items: flex-end;
     justify-items: center;
@@ -33,7 +30,6 @@ export const StyledHeader = styled.header`
     width: 95%;
     height: 90%;
     margin: auto;
-    display: grid;
-    grid-template-columns: 1fr 0.2fr;
+    ${({ theme: { mixins } }) => mixins.gridMixin('1fr 0.2fr', '1fr')}
   }
 `;
