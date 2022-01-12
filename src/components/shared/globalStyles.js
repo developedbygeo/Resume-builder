@@ -29,7 +29,11 @@ main {
   width: 100vw;
   height: 90vh;
   max-height: auto;
-  background: #eee;
+  background: ${({
+    theme: {
+      colors: { main },
+    },
+  }) => main || '#ffffff'};
 }
 h1 {
   font-size: 2.8rem;
@@ -56,9 +60,6 @@ label,
 div,
 li {
   font-size: 1.8rem;
-}
-::placeholder {
-  font-size: 1.4rem;
 }
 li {
   list-style: none;
