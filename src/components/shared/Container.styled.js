@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import placeholder from '../../assets/placeholder.png';
 
 export const Container = styled.div`
   width: 95%;
@@ -8,16 +9,12 @@ export const Container = styled.div`
   flex-direction: ${({ direction }) => direction || 'column'};
   justify-content: center;
   margin-top: 1rem;
-  align-items: ${({ align }) => align || 'center'};
-
-  & > input,
-  & > textarea {
-    width: 65%;
-  }
+  align-items: ${({ alignItems }) => alignItems || 'center'};
 `;
 
 export const LayoutContainer = styled(Container)`
   margin-top: 0;
+  gap: 3rem;
   ${({ theme: { mixins } }) =>
     mixins.gridMixin('1fr', 'repeat(4, 1fr)', 'center', 'flex-start')}
 `;
@@ -33,6 +30,6 @@ export const ImgContainer = styled.div`
   height: 60px;
   border-radius: 50%;
   position: relative;
-  background-image: url(https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/Gnome-stock_person.svg/1024px-Gnome-stock_person.svg.png);
+  background-image: url(${({ imageSrc }) => imageSrc || placeholder});
   background-size: cover;
 `;
