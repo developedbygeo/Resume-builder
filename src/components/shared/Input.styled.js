@@ -17,8 +17,6 @@ export const Input = styled.input`
 
 export const ImgInput = styled(Input)`
   padding: 0;
-  width: 60px;
-  height: 60px;
   border-radius: 50%;
   opacity: 0;
   cursor: pointer;
