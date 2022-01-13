@@ -26,16 +26,24 @@ const StyledForm = styled.form`
     font-weight: ${({ labelWeight }) => labelWeight || '400'};
     margin-block: 1rem;
   }
+  & input {
+    width: 7rem;
+    height: 7rem;
+  }
   & textarea {
-    resize: none;
+    resize: vertical;
+    height: 12rem;
   }
   & input,
   & textarea {
-    width: ${({ width }) => width || '90%'};
+    width: ${({ width }) => width || '100%'};
+    border-radius: 0.5rem 1rem 0 0;
+    border: 2px solid transparent;
   }
   & input:focus,
   & textarea:focus {
     border-bottom: 2px solid #31b1d8;
+    caret-color: #31b1d8;
   }
   & button {
     width: ${({ buttonWidth }) => buttonWidth || 'auto'};
