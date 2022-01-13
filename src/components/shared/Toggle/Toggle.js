@@ -1,9 +1,9 @@
 import StyledToggle from './Toggle.styled';
 
-const Toggle = (title) => {
+const Toggle = ({ title, id, onChange }) => {
   return (
     <StyledToggle title={title || ''}>
-      <input type="checkbox" />
+      <input type="checkbox" id={id} onChange={onChange} />
       <span />
     </StyledToggle>
   );
