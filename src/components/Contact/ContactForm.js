@@ -1,41 +1,71 @@
+import useInput from '../../hooks/useInput';
 import StyledForm from '../shared/Form.styled';
-import { Container } from '../shared/Container.styled';
-import { CtaButton } from '../shared/Button.styled';
-import { Input, Label } from '../shared/Input.styled';
+import FormInput from '../shared/FormInput';
+import FormButton from '../shared/FormButton';
+
+const validateName = (val) => val;
 
 const ContactForm = () => {
+  const {
+    value: emailValue,
+    isValueValid: isEmailValid,
+    hasError: emailHasError,
+    inputChangeHandler: emailChangeHandler,
+    inputBlurHandler: emailBlurHandler,
+  } = useInput(validateName);
+
+  const {
+    value: phoneValue,
+    isValueValid: isPhoneValid,
+    hasError: phoneHasError,
+    inputChangeHandler: phoneChangeHandler,
+    inputBlurHandler: phoneBlurHandler,
+  } = useInput(validateName);
+
+  const {
+    value: urlValue,
+    isValueValid: isUrlValid,
+    hasError: urlHasError,
+    inputChangeHandler: urlChangeHandler,
+    inputBlurHandler: urlBlurHandler,
+  } = useInput(validateName);
+
   return (
     <StyledForm>
-      <Container className="contLeft">
-        <Label htmlFor="email">Email</Label>
-        <Input
-          id="email"
-          type="email"
-          placeholder="eg. boat@mcboatface.com"
-          required
-        />
-      </Container>
-      <Container className="contLeft">
-        <Label htmlFor="phone">Phone Number</Label>
-        <Input
-          id="phone"
-          type="tel"
-          placeholder="eg. +44 1234 123456"
-          required
-        />
-      </Container>
-      <Container className="contLeft">
-        <Label htmlFor="linkedin">LinkedIn</Label>
-        <Input
-          id="linkedin"
-          type="url"
-          placeholder="eg. in/example-mcexample"
-          required
-        />
-      </Container>
-      <Container>
-        <CtaButton>Save</CtaButton>
-      </Container>
+      <FormInput
+        htmlFor="email"
+        inputId="email"
+        label="Email"
+        inputChange={emailChangeHandler}
+        inputBlur={emailBlurHandler}
+        inputValue={emailValue}
+        inputPlaceholder="boat@mcboatface.com"
+        inputType="email"
+        required
+      />
+      <FormInput
+        htmlFor="phone"
+        inputId="phone"
+        label="Phone Number"
+        inputChange={phoneChangeHandler}
+        inputBlur={phoneBlurHandler}
+        inputValue={phoneValue}
+        inputPlaceholder="eg. 44 1234 123456 (no spaces required)"
+        inputType="tel"
+        required
+      />
+      <FormInput
+        htmlFor="linkedin"
+        inputId="linkedin"
+        label="LinkedIn Profile"
+        inputChange={urlChangeHandler}
+        inputBlur={urlBlurHandler}
+        inputValue={urlValue}
+        inputPlaceholder="in/example-mcexample"
+        inputType="text"
+        required
+      />
+      <FormButton />
     </StyledForm>
   );
 };

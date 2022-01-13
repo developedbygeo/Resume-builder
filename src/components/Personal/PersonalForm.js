@@ -1,41 +1,73 @@
-import { Input, Label } from '../shared/Input.styled';
-import { Container } from '../shared//Container.styled';
-import { CtaButton } from '../shared//Button.styled';
+import useInput from '../../hooks/useInput';
 import StyledForm from '../shared/Form.styled';
+import FormInput from '../shared/FormInput';
+import FormButton from '../shared/FormButton';
+
+const validateName = (val) => val.trim().length > 2;
 
 const PersonalForm = () => {
+  const {
+    value: nameValue,
+    isValueValid: isFNameValid,
+    hasError: fNameHasError,
+    inputChangeHandler: nameChangeHandler,
+    inputBlurHandler: nameBlurHandler,
+  } = useInput(validateName);
+
+  const {
+    value: lastNameValue,
+    isValueValid: isLastNameValid,
+    hasError: lastNameHasError,
+    inputChangeHandler: lastNameChangeHandler,
+    inputBlurHandler: lastNameBlurHandler,
+  } = useInput(validateName);
+
+  const {
+    value: statementValue,
+    isValueValid: isStatementValid,
+    hasError: statementHameHasError,
+    inputChangeHandler: statementChangeHandler,
+    inputBlurHandler: statementBlurHandler,
+  } = useInput(validateName);
+
+  const isFormValid = isFNameValid;
+
   return (
     <StyledForm>
-      <Container>
-        <Label htmlFor="firstName">First Name</Label>
-        <Input
-          id="firstName"
-          type="text"
-          placeholder="Provide your first & middle name (if any)"
-          required
-        />
-      </Container>
-      <Container>
-        <Label htmlFor="lastName">Last Name</Label>
-        <Input
-          id="lastName"
-          type="text"
-          placeholder="Your full last name"
-          required
-        />
-      </Container>
-      <Container>
-        <Label htmlFor="personalStatement">Personal Statement</Label>
-        <Input
-          id="personalStatement"
-          as="textarea"
-          placeholder="Describe yourself & your goals in 2-3 sentences."
-          required
-        />
-      </Container>
-      <Container>
-        <CtaButton type="submit">Save</CtaButton>
-      </Container>
+      <FormInput
+        htmlFor="firstName"
+        inputId="firstName"
+        label="First Name"
+        inputChange={nameChangeHandler}
+        inputBlur={nameBlurHandler}
+        inputValue={nameValue}
+        inputPlaceholder="Provide your first & middle name (if any)"
+        inputType="text"
+        required
+      />
+      <FormInput
+        htmlFor="lastName"
+        inputId="lastName"
+        label="Last Name"
+        inputChange={lastNameChangeHandler}
+        inputBlur={lastNameBlurHandler}
+        inputValue={lastNameValue}
+        inputPlaceholder="Your full last name"
+        inputType="text"
+        required
+      />
+      <FormInput
+        htmlFor="personalStatement"
+        inputId="personalStatement"
+        label="Personal Statement"
+        inputChange={statementChangeHandler}
+        inputBlur={statementBlurHandler}
+        inputValue={statementValue}
+        inputPlaceholder="Describe yourself & your goals in 2-3 sentences."
+        inputAs="textarea"
+        required
+      />
+      <FormButton />
     </StyledForm>
   );
 };
