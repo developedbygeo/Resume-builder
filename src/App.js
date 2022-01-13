@@ -6,6 +6,7 @@ import Personal from './components/Personal/Personal';
 import { LayoutContainer } from './components/shared/Container.styled';
 import Contact from './components/Contact/Contact';
 import Employment from './components/Employment/Employment';
+import Education from './components/Education/Education';
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
             <Personal />
             <Contact />
             <Employment />
+            <Education />
           </LayoutContainer>
         </main>
       </>
