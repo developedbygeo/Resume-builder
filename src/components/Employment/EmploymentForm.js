@@ -126,6 +126,7 @@ const EmploymentForm = () => {
       />
       <FormInput
         isToggle={true}
+        toggleTitle="I am currently working here"
         htmlFor="stillHere"
         inputId="stillHere"
         label="Currently working here"

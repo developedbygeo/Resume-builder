@@ -103,6 +103,7 @@ const EducationForm = () => {
       />
       <FormInput
         isToggle={true}
+        toggleTitle="I am still studying here"
         htmlFor="currentlyStudying"
         inputId="currentlyStudying"
         label="Currently studying"
