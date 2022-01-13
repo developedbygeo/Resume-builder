@@ -23,11 +23,19 @@ export const StyledSection = styled.section`
   height: auto;
   width: 100%;
   margin-top: ${({ marginTop }) => marginTop || '0'};
+  border-bottom: 2px solid ${({ theme }) => theme.colors.gray};
+  padding-bottom: 3rem;
+
+  .photoCont {
+    position: absolute;
+    top: 12%;
+    right: 4%;
+  }
 `;
 
 export const ImgContainer = styled.div`
-  width: 60px;
-  height: 60px;
+  width: auto;
+  height: auto;
   border-radius: 50%;
   position: relative;
   background-image: url(${({ imageSrc }) => imageSrc || placeholder});
