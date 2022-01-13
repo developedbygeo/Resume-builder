@@ -1,11 +1,7 @@
 import { useState } from 'react';
-import {
-  StyledSection,
-  ImgContainer,
-  Container,
-} from '../shared/Container.styled';
-import { ImgInput } from '../shared/Input.styled';
+import { StyledSection, Container } from '../shared/Container.styled';
 import { AddMoreDetails } from '../shared/Button.styled';
+import PersonalPhoto from './PersonalPhoto';
 import PersonalForm from './PersonalForm';
 import PersonalAdditionalForm from './PersonalAdditionalForm';
 
@@ -17,13 +13,11 @@ const Personal = () => {
   };
 
   return (
-    <StyledSection maxHeight="auto" marginTop="3rem">
+    <StyledSection marginTop="3rem">
       <h1>Personal Details</h1>
       <Container direction="row">
         <PersonalForm />
-        <ImgContainer>
-          <ImgInput title="Provide your photo (optional)" type="file" />
-        </ImgContainer>
+        <PersonalPhoto />
       </Container>
       <AddMoreDetails onClick={moreDetailsHandler}>
         Toggle additional details ▼
