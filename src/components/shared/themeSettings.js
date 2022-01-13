@@ -3,6 +3,7 @@ const themeSettings = {
     header: '#f9f6f6',
     main: '#fdfcfe ',
     footer: '#475569',
+    gray: '#e2e9f4',
     cta: { standard: '#31b1d8', hover: '#218bab' },
     secondary: { standard: '#475569', hover: '#323b49' },
   },
