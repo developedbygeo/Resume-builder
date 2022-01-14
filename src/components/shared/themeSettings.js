@@ -4,6 +4,8 @@ const themeSettings = {
     main: '#fdfcfe ',
     footer: '#475569',
     gray: '#e2e9f4',
+    errorBorder: '1px solid #b40e0e',
+    errorBg: '#fddddd',
     cta: { standard: '#31b1d8', hover: '#218bab' },
     secondary: { standard: '#475569', hover: '#323b49' },
   },
