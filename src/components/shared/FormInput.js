@@ -3,6 +3,8 @@ import { Label, Input } from './Input.styled';
 import Toggle from './Toggle/Toggle';
 
 const FormInput = ({
+  className,
+  errorMessage,
   htmlFor,
   label,
   inputId,
@@ -20,6 +22,7 @@ const FormInput = ({
     <Container>
       <Label htmlFor={htmlFor}>{label}</Label>
       <Input
+        className={className}
         id={inputId}
         onChange={inputChange}
         onBlur={inputBlur}
@@ -29,6 +32,7 @@ const FormInput = ({
         required={required}
         as={inputAs}
       />
+      {className ? <p>{errorMessage}</p> : null}
     </Container>
   );
 
