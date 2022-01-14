@@ -15,7 +15,7 @@ const GlobalStyle = createGlobalStyle`
 html {
   font-size: 62.5%;
   @media ${devices.phoneStandard}{
-    font-size: 35%;
+    font-size: 40%;
   }
 }
 
