@@ -30,6 +30,10 @@ export const StyledSection = styled.section`
     position: absolute;
     top: 12%;
     right: 4%;
+    input {
+      height: 7rem;
+      width: 7rem;
+    }
   }
 `;
 
