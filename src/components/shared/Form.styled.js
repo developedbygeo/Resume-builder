@@ -46,7 +46,23 @@ const StyledForm = styled.form`
     caret-color: #31b1d8;
   }
   & button {
-    width: ${({ buttonWidth }) => buttonWidth || 'auto'};
+    width: ${({ buttonWidth }) => buttonWidth || '10rem'};
+    height: 4.5rem;
+    transition: all 250ms ease-in-out;
+  }
+  & button:disabled {
+    cursor: not-allowed;
+    background: #d3ddee;
+    color: ${({ theme }) => theme.colors.footer};
+  }
+
+  .invalid {
+    border: ${({ theme }) => theme.colors.errorBorder};
+    background-color: ${({ theme }) => theme.colors.errorBg};
+  }
+  .invalid ~ p {
+    color: #b40e0e;
+    letter-spacing: 0.1rem;
   }
 `;
 
