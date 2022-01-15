@@ -1,9 +1,9 @@
 import useInput from '../../hooks/useInput';
+import { useContext } from 'react';
 import StyledForm from '../shared/Form.styled';
 import FormInput from '../shared/FormInput';
 import FormButton from '../shared/FormButton';
-
-const validateText = (val) => val.trim().length > 2;
+import { validation, errors } from '../shared/validation';
 
 const PersonalAdditionalForm = () => {
   const {
@@ -12,7 +12,7 @@ const PersonalAdditionalForm = () => {
     hasError: countryHasError,
     inputChangeHandler: countryChangeHandler,
     inputBlurHandler: countryBlurHandler,
-  } = useInput(validateText);
+  } = useInput(validation.validateGeneric);
 
   const {
     value: cityValue,
@@ -20,7 +20,7 @@ const PersonalAdditionalForm = () => {
     hasError: cityHasError,
     inputChangeHandler: cityChangeHandler,
     inputBlurHandler: cityBlurHandler,
-  } = useInput(validateText);
+  } = useInput(validation.validateGeneric);
 
   const {
     value: postalValue,
@@ -28,11 +28,15 @@ const PersonalAdditionalForm = () => {
     hasError: postalHasError,
     inputChangeHandler: postalChangeHandler,
     inputBlurHandler: postalBlurHandler,
-  } = useInput(validateText);
+  } = useInput(validation.validatePostal);
+
+  const isFormValid = isCountryValid && isCityValid && isPostalValid;
 
   return (
-    <StyledForm>
+    <StyledForm autoComplete="off">
       <FormInput
+        className={countryHasError && 'invalid'}
+        errorMessage={errors.errorGeneric('country')}
         htmlFor="country"
         inputId="country"
         label="Country"
@@ -43,6 +47,8 @@ const PersonalAdditionalForm = () => {
         inputType="text"
       />
       <FormInput
+        className={cityHasError && 'invalid'}
+        errorMessage={errors.errorGeneric('city')}
         htmlFor="city"
         inputId="city"
         label="City"
@@ -53,6 +59,8 @@ const PersonalAdditionalForm = () => {
         inputType="text"
       />
       <FormInput
+        className={postalHasError && 'invalid'}
+        errorMessage={errors.errorPostal}
         htmlFor="postal"
         inputId="postal"
         label="Postal Code"
@@ -62,7 +70,7 @@ const PersonalAdditionalForm = () => {
         inputPlaceholder="eg. G40PS"
         inputType="text"
       />
-      <FormButton />
+      <FormButton disabled={!isFormValid} />
     </StyledForm>
   );
 };
