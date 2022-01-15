@@ -1,9 +1,8 @@
 import useInput from '../../hooks/useInput';
+import { errors, validation } from '../shared/validation';
 import StyledForm from '../shared/Form.styled';
 import FormInput from '../shared/FormInput';
 import FormButton from '../shared/FormButton';
-
-const validateName = (val) => val.trim().length > 2;
 
 const PersonalForm = () => {
   const {
@@ -12,7 +11,7 @@ const PersonalForm = () => {
     hasError: fNameHasError,
     inputChangeHandler: nameChangeHandler,
     inputBlurHandler: nameBlurHandler,
-  } = useInput(validateName);
+  } = useInput(validation.validateGeneric);
 
   const {
     value: lastNameValue,
@@ -20,7 +19,7 @@ const PersonalForm = () => {
     hasError: lastNameHasError,
     inputChangeHandler: lastNameChangeHandler,
     inputBlurHandler: lastNameBlurHandler,
-  } = useInput(validateName);
+  } = useInput(validation.validateGeneric);
 
   const {
     value: statementValue,
@@ -28,13 +27,21 @@ const PersonalForm = () => {
     hasError: statementHameHasError,
     inputChangeHandler: statementChangeHandler,
     inputBlurHandler: statementBlurHandler,
-  } = useInput(validateName);
+  } = useInput(validation.validateText);
 
-  const isFormValid = isFNameValid;
+  const isFormValid = isFNameValid && isLastNameValid && isStatementValid;
+
+  const formSubmitHandler = (e) => {
+    e.preventDefault();
+    if (isFormValid) {
+    }
+  };
 
   return (
-    <StyledForm>
+    <StyledForm onSubmit={formSubmitHandler} autoComplete="off">
       <FormInput
+        className={fNameHasError && 'invalid'}
+        errorMessage={errors.errorGeneric('first name')}
         htmlFor="firstName"
         inputId="firstName"
         label="First Name"
@@ -46,6 +53,8 @@ const PersonalForm = () => {
         required
       />
       <FormInput
+        className={lastNameHasError && 'invalid'}
+        errorMessage={errors.errorGeneric('last name')}
         htmlFor="lastName"
         inputId="lastName"
         label="Last Name"
@@ -57,6 +66,8 @@ const PersonalForm = () => {
         required
       />
       <FormInput
+        className={statementHameHasError && 'invalid'}
+        errorMessage={errors.errorPersonalStatement}
         htmlFor="personalStatement"
         inputId="personalStatement"
         label="Personal Statement"
@@ -67,7 +78,7 @@ const PersonalForm = () => {
         inputAs="textarea"
         required
       />
-      <FormButton />
+      <FormButton disabled={!isFormValid} />
     </StyledForm>
   );
 };
