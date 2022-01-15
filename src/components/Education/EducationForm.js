@@ -47,7 +47,7 @@ const EducationForm = () => {
   } = useInput(validateText);
 
   return (
-    <StyledForm>
+    <StyledForm autoComplete="off">
       <FormInput
         htmlFor="school"
         inputId="school"
@@ -108,38 +108,6 @@ const EducationForm = () => {
         inputId="currentlyStudying"
         label="Currently studying"
       />
-
-      {/* <Container>
-        <Label htmlFor="school">School</Label>
-        <Input id="school" type="text" required />
-      </Container>
-      <Container>
-        <Label htmlFor="degree">Degree</Label>
-        <Input id="degree" type="text" required />
-      </Container>
-      <Container>
-        <Label htmlFor="educationfrom">From</Label>
-        <Input id="educationfrom" type="date" required />
-      </Container>
-      <Container>
-        <Label htmlFor="educationto">To</Label>
-        <Input id="educationto" type="date" required />
-      </Container>
-      <Container>
-        <Label htmlFor="currentlystudying">Currently studying here</Label>
-        <Toggle id="currentlystudying" />
-      </Container>
-      <Container>
-        <Label htmlFor="edudescription">Description</Label>
-        <Input
-          id="edudescription"
-          as="textarea"
-          placeholder="eg. Graduated with Honors/Distinction, majored in Engineering, GPA, etc"
-        />
-      </Container>
-      <Container>
-        <CtaButton type="submit">Save</CtaButton>
-      </Container> */}
       <FormButton />
     </StyledForm>
   );
