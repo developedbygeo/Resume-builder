@@ -1,9 +1,8 @@
 import useInput from '../../hooks/useInput';
+import { errors, validation } from '../shared/validation';
 import StyledForm from '../shared/Form.styled';
 import FormInput from '../shared/FormInput';
 import FormButton from '../shared/FormButton';
-
-const validateName = (val) => val;
 
 const ContactForm = () => {
   const {
@@ -12,7 +11,7 @@ const ContactForm = () => {
     hasError: emailHasError,
     inputChangeHandler: emailChangeHandler,
     inputBlurHandler: emailBlurHandler,
-  } = useInput(validateName);
+  } = useInput(validation.validateEmail);
 
   const {
     value: phoneValue,
@@ -20,7 +19,7 @@ const ContactForm = () => {
     hasError: phoneHasError,
     inputChangeHandler: phoneChangeHandler,
     inputBlurHandler: phoneBlurHandler,
-  } = useInput(validateName);
+  } = useInput(validation.validatePhone);
 
   const {
     value: urlValue,
@@ -28,11 +27,15 @@ const ContactForm = () => {
     hasError: urlHasError,
     inputChangeHandler: urlChangeHandler,
     inputBlurHandler: urlBlurHandler,
-  } = useInput(validateName);
+  } = useInput(validation.validateLinkedIn);
+
+  const isFormValid = isEmailValid && isPhoneValid && isUrlValid;
 
   return (
-    <StyledForm>
+    <StyledForm autoComplete="off">
       <FormInput
+        className={emailHasError && 'invalid'}
+        errorMessage={errors.errorEmail}
         htmlFor="email"
         inputId="email"
         label="Email"
@@ -44,6 +47,8 @@ const ContactForm = () => {
         required
       />
       <FormInput
+        className={phoneHasError && 'invalid'}
+        errorMessage={errors.errorGeneric('phone number')}
         htmlFor="phone"
         inputId="phone"
         label="Phone Number"
@@ -55,6 +60,8 @@ const ContactForm = () => {
         required
       />
       <FormInput
+        className={urlHasError && 'invalid'}
+        errorMessage={errors.errorLinkedin}
         htmlFor="linkedin"
         inputId="linkedin"
         label="LinkedIn Profile"
@@ -65,7 +72,7 @@ const ContactForm = () => {
         inputType="text"
         required
       />
-      <FormButton />
+      <FormButton disabled={!isFormValid} />
     </StyledForm>
   );
 };
