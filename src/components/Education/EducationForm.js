@@ -47,6 +47,13 @@ const EducationForm = () => {
     inputBlurHandler: schoolDescBlurHandler,
   } = useInput(validation.validateOptional);
 
+  const isFormValid =
+    isSchoolValid &&
+    isDegreeValid &&
+    isSchoolStartValid &&
+    isSchoolEndValid &&
+    isSchoolDescValid;
+
   return (
     <StyledForm autoComplete="off">
       <FormInput
@@ -118,7 +125,7 @@ const EducationForm = () => {
         inputId="currentlyStudying"
         label="Currently studying"
       />
-      <FormButton />
+      <FormButton disabled={!isFormValid} />
     </StyledForm>
   );
 };
