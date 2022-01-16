@@ -9,6 +9,7 @@ export const InfoContext = React.createContext({
 const defaultState = {
   information: {
     personal: {
+      imageExists: false,
       firstName: '',
       lastName: '',
       PersonalStatement: '',
