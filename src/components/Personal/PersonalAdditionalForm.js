@@ -55,7 +55,7 @@ const PersonalAdditionalForm = () => {
         inputChange={cityChangeHandler}
         inputBlur={cityBlurHandler}
         inputValue={cityValue}
-        inputPlaceholder="eg. United Kingdom"
+        inputPlaceholder="eg. Edinburgh"
         inputType="text"
       />
       <FormInput
