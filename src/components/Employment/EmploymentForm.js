@@ -1,12 +1,14 @@
 import useInput from '../../hooks/useInput';
+import {
+  errors,
+  validation,
+  currentYear,
+  currentMonth,
+  currentDay,
+} from '../shared/validation';
 import StyledForm from '../shared/Form.styled';
 import FormInput from '../shared/FormInput';
 import FormButton from '../shared/FormButton';
-import Toggle from '../shared/Toggle/Toggle';
-
-const validateStartingDate = (val) => val;
-const validateEndingDate = (val) => val;
-const validateText = (val) => val.trim().length > 2;
 
 const EmploymentForm = () => {
   const {
@@ -15,7 +17,7 @@ const EmploymentForm = () => {
     hasError: jobHasError,
     inputChangeHandler: jobChangeHandler,
     inputBlurHandler: jobBlurHandler,
-  } = useInput(validateText);
+  } = useInput(validation.validateTextNumbers);
 
   const {
     value: employerValue,
@@ -23,7 +25,7 @@ const EmploymentForm = () => {
     hasError: employerHasError,
     inputChangeHandler: employerChangeHandler,
     inputBlurHandler: employerBlurHandler,
-  } = useInput(validateText);
+  } = useInput(validation.validateTextNumbers);
 
   const {
     value: startingDateValue,
@@ -31,7 +33,7 @@ const EmploymentForm = () => {
     hasError: startingDateHasError,
     inputChangeHandler: startingDateChangeHandler,
     inputBlurHandler: startingDateBlurHandler,
-  } = useInput(validateStartingDate);
+  } = useInput(validation.validateStartingDate);
 
   const {
     value: endDateValue,
@@ -39,7 +41,7 @@ const EmploymentForm = () => {
     hasError: endDateHasError,
     inputChangeHandler: endDateChangeHandler,
     inputBlurHandler: endDateBlurHandler,
-  } = useInput(validateEndingDate);
+  } = useInput(validation.validateEndingDate);
 
   const {
     value: jobLocationValue,
@@ -47,7 +49,7 @@ const EmploymentForm = () => {
     hasError: jobLocationHasError,
     inputChangeHandler: jobLocationChangeHandler,
     inputBlurHandler: jobLocationBlurHandler,
-  } = useInput(validateText);
+  } = useInput(validation.validateGeneric);
 
   const {
     value: jobDescriptionValue,
@@ -55,11 +57,26 @@ const EmploymentForm = () => {
     hasError: jobDescriptionHasError,
     inputChangeHandler: jobDescriptionChangeHandler,
     inputBlurHandler: jobDescriptionBlurHandler,
-  } = useInput(validateText);
+  } = useInput(validation.validateText);
+
+  const isFormValid =
+    isEmployerValid &&
+    isJobValid &&
+    isStartingDateValid &&
+    isEndDateValid &&
+    isJobLocationValid &&
+    isJobDescriptionValid;
+
+  const formSubmitHandler = (e) => {
+    if (isFormValid) {
+    }
+  };
 
   return (
-    <StyledForm>
+    <StyledForm autoComplete="off">
       <FormInput
+        className={jobHasError && 'invalid'}
+        errorMessage={errors.errorGeneric('job title')}
         htmlFor="title"
         inputId="title"
         label="Job Title"
@@ -71,6 +88,8 @@ const EmploymentForm = () => {
         required
       />
       <FormInput
+        className={employerHasError && 'invalid'}
+        errorMessage={errors.errorGeneric('employer')}
         htmlFor="employer"
         inputId="employer"
         label="Employer"
@@ -82,6 +101,8 @@ const EmploymentForm = () => {
         required
       />
       <FormInput
+        className={startingDateHasError && 'invalid'}
+        errorMessage={errors.errorDateFrom}
         htmlFor="startdate"
         inputId="startdate"
         label="From"
@@ -89,9 +110,13 @@ const EmploymentForm = () => {
         inputBlur={startingDateBlurHandler}
         inputValue={startingDateValue}
         inputType="date"
+        minConstraint={`${currentYear - 60}-01-01`}
+        maxConstraint={`${currentYear}-${currentMonth}-${currentDay}`}
         required
       />
       <FormInput
+        className={endDateHasError && 'invalid'}
+        errorMessage={errors.errorDateTo}
         htmlFor="enddate"
         inputId="enddate"
         label="To"
@@ -99,9 +124,12 @@ const EmploymentForm = () => {
         inputBlur={endDateBlurHandler}
         inputValue={endDateValue}
         inputType="date"
-        required
+        minConstraint={`${currentYear - 60}-01-01`}
+        maxConstraint={`${currentYear + 5}-${currentMonth}-${currentDay}`}
       />
       <FormInput
+        className={jobLocationHasError && 'invalid'}
+        errorMessage={errors.errorGeneric('location')}
         htmlFor="joblocation"
         inputId="joblocation"
         label="Location"
@@ -113,6 +141,8 @@ const EmploymentForm = () => {
         required
       />
       <FormInput
+        className={jobDescriptionHasError && 'invalid'}
+        errorMessage={errors.errorTextarea('job description')}
         htmlFor="jobdescription"
         inputId="jobdescription"
         label="Description"
@@ -131,7 +161,7 @@ const EmploymentForm = () => {
         inputId="stillHere"
         label="Currently working here"
       />
-      <FormButton />
+      <FormButton disabled={!isFormValid} />
     </StyledForm>
   );
 };
