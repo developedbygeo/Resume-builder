@@ -67,7 +67,7 @@ const PersonalForm = () => {
       />
       <FormInput
         className={statementHameHasError && 'invalid'}
-        errorMessage={errors.errorPersonalStatement}
+        errorMessage={errors.errorTextarea('personal statement')}
         htmlFor="personalStatement"
         inputId="personalStatement"
         label="Personal Statement"
