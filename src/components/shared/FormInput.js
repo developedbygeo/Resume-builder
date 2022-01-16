@@ -17,6 +17,8 @@ const FormInput = ({
   inputAs,
   isToggle = false,
   toggleTitle,
+  minConstraint,
+  maxConstraint,
 }) => {
   const standardLayout = (
     <Container>
@@ -31,6 +33,8 @@ const FormInput = ({
         placeholder={inputPlaceholder}
         required={required}
         as={inputAs}
+        min={minConstraint}
+        max={maxConstraint}
       />
       {className ? <p>{errorMessage}</p> : null}
     </Container>
