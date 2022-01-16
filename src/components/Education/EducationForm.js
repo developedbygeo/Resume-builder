@@ -1,4 +1,5 @@
 import useInput from '../../hooks/useInput';
+import { validation, errors } from '../shared/validation';
 import StyledForm from '../shared/Form.styled';
 import FormInput from '../shared/FormInput';
 import FormButton from '../shared/FormButton';
@@ -12,7 +13,7 @@ const EducationForm = () => {
     hasError: schoolHasError,
     inputChangeHandler: schoolChangeHandler,
     inputBlurHandler: schoolBlurHandler,
-  } = useInput(validateText);
+  } = useInput(validation.validatetextAndSpaces);
 
   const {
     value: degreeValue,
@@ -20,7 +21,7 @@ const EducationForm = () => {
     hasError: degreeHasError,
     inputChangeHandler: degreeChangeHandler,
     inputBlurHandler: degreeBlurHandler,
-  } = useInput(validateText);
+  } = useInput(validation.validatetextAndSpaces);
 
   const {
     value: schoolStartValue,
@@ -28,7 +29,7 @@ const EducationForm = () => {
     hasError: schoolStartHasError,
     inputChangeHandler: schoolStartChangeHandler,
     inputBlurHandler: schoolStartBlurHandler,
-  } = useInput(validateText);
+  } = useInput(validation.validateStartingDate);
 
   const {
     value: schoolEndValue,
@@ -36,7 +37,7 @@ const EducationForm = () => {
     hasError: schoolEndHasError,
     inputChangeHandler: schoolEndChangeHandler,
     inputBlurHandler: schoolEndBlurHandler,
-  } = useInput(validateText);
+  } = useInput(validation.validateEndingDate);
 
   const {
     value: schoolDescValue,
@@ -44,11 +45,13 @@ const EducationForm = () => {
     hasError: schoolDescHasError,
     inputChangeHandler: schoolDescChangeHandler,
     inputBlurHandler: schoolDescBlurHandler,
-  } = useInput(validateText);
+  } = useInput(validation.validateOptional);
 
   return (
     <StyledForm autoComplete="off">
       <FormInput
+        className={schoolHasError && 'invalid'}
+        errorMessage={errors.errorGeneric('school')}
         htmlFor="school"
         inputId="school"
         label="School"
@@ -60,6 +63,8 @@ const EducationForm = () => {
         required
       />
       <FormInput
+        className={degreeHasError && 'invalid'}
+        errorMessage={errors.errorGeneric('degree title')}
         htmlFor="degree"
         inputId="degree"
         label="Degree"
@@ -71,6 +76,8 @@ const EducationForm = () => {
         required
       />
       <FormInput
+        className={schoolStartHasError && 'invalid'}
+        errorMessage={errors.errorDateFrom}
         htmlFor="educationfrom"
         inputId="educationfrom"
         label="From"
@@ -81,6 +88,8 @@ const EducationForm = () => {
         required
       />
       <FormInput
+        className={schoolEndHasError && 'invalid'}
+        errorMessage={errors.errorDateTo}
         htmlFor="educationto"
         inputId="educationto"
         label="To"
@@ -91,6 +100,8 @@ const EducationForm = () => {
         required
       />
       <FormInput
+        className={schoolDescHasError && 'invalid'}
+        errorMessage={errors.errorSchoolDesc}
         htmlFor="edudescription"
         inputId="edudescription"
         label="Description"
@@ -98,8 +109,7 @@ const EducationForm = () => {
         inputBlur={schoolDescBlurHandler}
         inputValue={schoolDescValue}
         inputAs="textarea"
-        inputPlaceholder="eg. Graduated with Honors/Distinction, majored in Engineering, GPA, etc"
-        required
+        inputPlaceholder="(Optional) Can include information such as: Graduated with Honors/Distinction, majored in Engineering, GPA, etc. Up to 200 characters"
       />
       <FormInput
         isToggle={true}
