@@ -26,6 +26,11 @@ export const StyledSection = styled.section`
   border-bottom: 2px solid ${({ theme }) => theme.colors.gray};
   padding-bottom: 3rem;
 
+  .editContainer {
+    justify-content: space-between;
+    width: 100%;
+  }
+
   .photoCont {
     position: absolute;
     top: 12%;
