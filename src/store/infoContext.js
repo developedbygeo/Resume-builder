@@ -1,4 +1,4 @@
-import React, { useReducer, useEffect } from 'react';
+import React, { useReducer } from 'react';
 import _ from 'lodash';
 
 export const InfoContext = React.createContext({
@@ -8,11 +8,11 @@ export const InfoContext = React.createContext({
 
 const defaultState = {
   information: {
+    imageExists: false,
     personal: {
-      imageExists: false,
       firstName: '',
       lastName: '',
-      PersonalStatement: '',
+      personalStatement: '',
     },
     additional: {
       country: '',
@@ -44,16 +44,19 @@ const defaultState = {
   },
 };
 
-const informationReducer = (state = defaultValues, action) => {
+const informationReducer = (state = defaultState, action) => {
   const currentSnapshot = _.cloneDeep(state);
+  const { type, payload } = action;
   const {
-    information: { personal, additional, contact, employment, education },
+    information: { personal },
   } = currentSnapshot;
 
-  switch (action.type) {
-    case 'UPDATE_PERSONAL': {
+  switch (type) {
+    case 'ADD_PERSONAL': {
+      _.assign(personal, payload);
+      return { ...currentSnapshot };
     }
-    case 'UPDATE_ADDITIONAL': {
+    case 'ADD_ADDITIONAL': {
     }
     case 'ADD_CONTACT': {
     }
@@ -73,10 +76,10 @@ const InformationProvider = ({ children }) => {
   );
 
   const addPersonalHandler = (details) => {
-    dispatchFn({ type: 'UPDATE_PERSONAL', payload: details });
+    dispatchFn({ type: 'ADD_PERSONAL', payload: details });
   };
   const addAdditionalHandler = (details) => {
-    dispatchFn({ type: 'UPDATE_ADDITIONAL', payload: details });
+    dispatchFn({ type: 'ADD_ADDITIONAL', payload: details });
   };
   const addContactHandler = (details) => {
     dispatchFn({ type: 'ADD_CONTACT', payload: details });
