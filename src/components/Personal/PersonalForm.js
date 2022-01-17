@@ -1,12 +1,16 @@
+import { useContext } from 'react';
+import { InfoContext } from '../../store/infoContext';
 import useInput from '../../hooks/useInput';
 import { errors, validation } from '../shared/validation';
 import StyledForm from '../shared/Form.styled';
 import FormInput from '../shared/FormInput';
 import FormButton from '../shared/FormButton';
 
-const PersonalForm = () => {
+const PersonalForm = ({ checkSubmission }) => {
+  const { addPersonal } = useContext(InfoContext);
+
   const {
-    value: nameValue,
+    value: firstName,
     isValueValid: isFNameValid,
     hasError: fNameHasError,
     inputChangeHandler: nameChangeHandler,
@@ -14,7 +18,7 @@ const PersonalForm = () => {
   } = useInput(validation.validateGeneric);
 
   const {
-    value: lastNameValue,
+    value: lastName,
     isValueValid: isLastNameValid,
     hasError: lastNameHasError,
     inputChangeHandler: lastNameChangeHandler,
@@ -22,7 +26,7 @@ const PersonalForm = () => {
   } = useInput(validation.validateGeneric);
 
   const {
-    value: statementValue,
+    value: personalStatement,
     isValueValid: isStatementValid,
     hasError: statementHameHasError,
     inputChangeHandler: statementChangeHandler,
@@ -34,6 +38,8 @@ const PersonalForm = () => {
   const formSubmitHandler = (e) => {
     e.preventDefault();
     if (isFormValid) {
+      addPersonal({ firstName, lastName, personalStatement });
+      checkSubmission({ personalForm: true });
     }
   };
 
@@ -47,7 +53,7 @@ const PersonalForm = () => {
         label="First Name"
         inputChange={nameChangeHandler}
         inputBlur={nameBlurHandler}
-        inputValue={nameValue}
+        inputValue={firstName}
         inputPlaceholder="Provide your first & middle name (if any)"
         inputType="text"
         required
@@ -60,7 +66,7 @@ const PersonalForm = () => {
         label="Last Name"
         inputChange={lastNameChangeHandler}
         inputBlur={lastNameBlurHandler}
-        inputValue={lastNameValue}
+        inputValue={lastName}
         inputPlaceholder="Your full last name"
         inputType="text"
         required
@@ -73,7 +79,7 @@ const PersonalForm = () => {
         label="Personal Statement"
         inputChange={statementChangeHandler}
         inputBlur={statementBlurHandler}
-        inputValue={statementValue}
+        inputValue={personalStatement}
         inputPlaceholder="Describe yourself & your goals in 2-3 sentences."
         inputAs="textarea"
         required
