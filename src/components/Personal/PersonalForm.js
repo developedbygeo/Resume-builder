@@ -1,13 +1,15 @@
-import { useContext } from 'react';
-import { InfoContext } from '../../store/infoContext';
 import useInput from '../../hooks/useInput';
+import { useContext, useState } from 'react';
+import { InfoContext } from '../../store/infoContext';
 import { errors, validation } from '../shared/validation';
 import StyledForm from '../shared/Form.styled';
 import FormInput from '../shared/FormInput';
 import FormButton from '../shared/FormButton';
+import submittedFormLayout from '../shared/layout';
 
-const PersonalForm = ({ checkSubmission }) => {
+const PersonalForm = () => {
   const { addPersonal } = useContext(InfoContext);
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const {
     value: firstName,
@@ -37,13 +39,14 @@ const PersonalForm = ({ checkSubmission }) => {
 
   const formSubmitHandler = (e) => {
     e.preventDefault();
-    if (isFormValid) {
-      addPersonal({ firstName, lastName, personalStatement });
-      checkSubmission({ personalForm: true });
+    if (!isFormValid) {
+      return;
     }
+    addPersonal({ firstName, lastName, personalStatement });
+    setIsSubmitted(true);
   };
 
-  return (
+  return !isSubmitted ? (
     <StyledForm onSubmit={formSubmitHandler} autoComplete="off">
       <FormInput
         className={fNameHasError && 'invalid'}
@@ -86,6 +89,8 @@ const PersonalForm = ({ checkSubmission }) => {
       />
       <FormButton disabled={!isFormValid} />
     </StyledForm>
+  ) : (
+    submittedFormLayout('Personal details', () => setIsSubmitted(false))
   );
 };
 
