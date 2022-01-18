@@ -29,11 +29,13 @@ export const StyledSection = styled.section`
   .editContainer {
     justify-content: space-between;
     width: 100%;
+    max-width: 45rem;
+    padding: 1rem;
   }
 
   .photoCont {
     position: absolute;
-    top: 12%;
+    top: 11%;
     right: 4%;
     input {
       height: 7rem;
