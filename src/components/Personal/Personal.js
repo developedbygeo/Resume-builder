@@ -3,12 +3,10 @@ import { StyledSection, Container } from '../shared/Container.styled';
 import { AddMoreDetails } from '../shared/Button.styled';
 import PersonalPhoto from './PersonalPhoto';
 import PersonalForm from './PersonalForm';
-import { CtaButton } from '../shared/Button.styled';
 import PersonalAdditionalForm from './PersonalAdditionalForm';
 
 const Personal = () => {
   const [toggleMoreDetails, setToggleMoreDetails] = useState(false);
-  const [persFormSubmitted, setPersFormSubmitted] = useState(false);
   const [additionalFormSubmitted, setAdditionalFormSubmitted] = useState(false);
 
   const moreDetailsHandler = () => {
@@ -16,52 +14,25 @@ const Personal = () => {
   };
 
   const checkSubmissionHandler = (status) => {
-    const formIdentifier =
-      'personalForm' in status
-        ? setPersFormSubmitted
-        : setAdditionalFormSubmitted;
-    formIdentifier(Object.values(status)[0]);
+    if ('additionalForm' in status) {
+      setAdditionalFormSubmitted(true);
+    }
   };
 
-  const retrievePFFormHandler = () => {
-    setPersFormSubmitted(false);
-  };
-
-  const retrieveAdditionalFormHandler = () => {
-    setAdditionalFormSubmitted(false);
-  };
-
-  const postSubmissionLayout = (field, retrieveFn) => {
-    return (
-      <Container className="editContainer" direction="row">
-        <h3>{field} submitted!</h3>
-        <CtaButton onClick={retrieveFn}>Edit</CtaButton>
-      </Container>
-    );
-  };
-
-  const personalFormLayout = !persFormSubmitted ? (
-    <Container direction="row">
-      <PersonalForm checkSubmission={checkSubmissionHandler} />
-      <PersonalPhoto />
-    </Container>
-  ) : (
-    postSubmissionLayout('Personal details', retrievePFFormHandler)
-  );
-
-  const additionalFormLayout = !additionalFormSubmitted ? (
+  const shouldToggleAppear = !additionalFormSubmitted && (
     <AddMoreDetails onClick={moreDetailsHandler}>
       Toggle additional details ▼
     </AddMoreDetails>
-  ) : (
-    postSubmissionLayout('Additional details', retrieveAdditionalFormHandler)
   );
 
   return (
     <StyledSection marginTop="3rem">
       <h1>Personal Details</h1>
-      {personalFormLayout}
-      {additionalFormLayout}
+      <Container direction="row">
+        <PersonalForm checkSubmission={checkSubmissionHandler} />
+        <PersonalPhoto />
+      </Container>
+      {shouldToggleAppear}
       {toggleMoreDetails && (
         <PersonalAdditionalForm checkSubmission={checkSubmissionHandler} />
       )}
