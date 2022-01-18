@@ -1,13 +1,18 @@
 import useInput from '../../hooks/useInput';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
+import { InfoContext } from '../../store/infoContext';
 import StyledForm from '../shared/Form.styled';
 import FormInput from '../shared/FormInput';
 import FormButton from '../shared/FormButton';
 import { validation, errors } from '../shared/validation';
+import submittedFormLayout from '../shared/layout';
 
-const PersonalAdditionalForm = () => {
+const PersonalAdditionalForm = ({ checkSubmission }) => {
+  const { addAdditional } = useContext(InfoContext);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
   const {
-    value: countryValue,
+    value: country,
     isValueValid: isCountryValid,
     hasError: countryHasError,
     inputChangeHandler: countryChangeHandler,
@@ -15,7 +20,7 @@ const PersonalAdditionalForm = () => {
   } = useInput(validation.validateGeneric);
 
   const {
-    value: cityValue,
+    value: city,
     isValueValid: isCityValid,
     hasError: cityHasError,
     inputChangeHandler: cityChangeHandler,
@@ -23,7 +28,7 @@ const PersonalAdditionalForm = () => {
   } = useInput(validation.validateGeneric);
 
   const {
-    value: postalValue,
+    value: postal,
     isValueValid: isPostalValid,
     hasError: postalHasError,
     inputChangeHandler: postalChangeHandler,
@@ -32,8 +37,17 @@ const PersonalAdditionalForm = () => {
 
   const isFormValid = isCountryValid && isCityValid && isPostalValid;
 
-  return (
-    <StyledForm autoComplete="off">
+  const formSubmitHandler = (e) => {
+    e.preventDefault();
+    if (!isFormValid) return;
+
+    addAdditional({ country, city, postal });
+    setIsSubmitted(true);
+    checkSubmission({ additionalForm: true });
+  };
+
+  return !isSubmitted ? (
+    <StyledForm onSubmit={formSubmitHandler} autocomplete="off">
       <FormInput
         className={countryHasError && 'invalid'}
         errorMessage={errors.errorGeneric('country')}
@@ -42,7 +56,7 @@ const PersonalAdditionalForm = () => {
         label="Country"
         inputChange={countryChangeHandler}
         inputBlur={countryBlurHandler}
-        inputValue={countryValue}
+        inputValue={country}
         inputPlaceholder="eg. United Kingdom"
         inputType="text"
       />
@@ -54,7 +68,7 @@ const PersonalAdditionalForm = () => {
         label="City"
         inputChange={cityChangeHandler}
         inputBlur={cityBlurHandler}
-        inputValue={cityValue}
+        inputValue={city}
         inputPlaceholder="eg. Edinburgh"
         inputType="text"
       />
@@ -66,12 +80,14 @@ const PersonalAdditionalForm = () => {
         label="Postal Code"
         inputChange={postalChangeHandler}
         inputBlur={postalBlurHandler}
-        inputValue={postalValue}
+        inputValue={postal}
         inputPlaceholder="eg. G40PS"
         inputType="text"
       />
       <FormButton disabled={!isFormValid} />
     </StyledForm>
+  ) : (
+    submittedFormLayout('Additional details', () => setIsSubmitted(false))
   );
 };
 
