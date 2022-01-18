@@ -42,29 +42,48 @@ const defaultState = {
       currentStatus: false,
     },
   },
+  status: {
+    personal: false,
+    additional: false,
+    contact: false,
+    education: false,
+    employment: false,
+  },
 };
 
 const informationReducer = (state = defaultState, action) => {
   const currentSnapshot = _.cloneDeep(state);
   const { type, payload } = action;
   const {
-    information: { personal },
+    status,
+    information: { personal, additional, contact, employment, education },
   } = currentSnapshot;
 
   switch (type) {
     case 'ADD_PERSONAL': {
       _.assign(personal, payload);
+      status.personal = true;
       return { ...currentSnapshot };
     }
     case 'ADD_ADDITIONAL': {
+      _.assign(additional, payload);
+      status.additional = true;
+      return { ...currentSnapshot };
     }
     case 'ADD_CONTACT': {
+      _.assign(contact, payload);
+      status.contact = true;
+      return { ...currentSnapshot };
     }
     case 'ADD_EMPLOYMENT': {
+      _.assign(employment, payload);
+      status.employment = true;
+      return { ...currentSnapshot };
     }
     case 'ADD_EDUCATION': {
-    }
-    case 'UPDATE_EXISTING': {
+      _.assign(education, payload);
+      status.education = true;
+      return { ...currentSnapshot };
     }
   }
 };
@@ -90,9 +109,6 @@ const InformationProvider = ({ children }) => {
   const addEducationHandler = (details) => {
     dispatchFn({ type: 'ADD_EDUCATION', payload: details });
   };
-  const updateExistingHandler = (update) => {
-    dispatchFn({ type: 'UPDATE_EXISTING', payload: update });
-  };
 
   const defaultValues = {
     defaultState,
@@ -101,7 +117,6 @@ const InformationProvider = ({ children }) => {
     addContact: addContactHandler,
     addEmployment: addEmploymentHandler,
     addEducation: addEducationHandler,
-    updateInfo: updateExistingHandler,
   };
 
   return (
