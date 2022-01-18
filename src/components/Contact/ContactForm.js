@@ -1,12 +1,18 @@
 import useInput from '../../hooks/useInput';
+import { useContext, useState } from 'react';
+import { InfoContext } from '../../store/infoContext';
 import { errors, validation } from '../shared/validation';
 import StyledForm from '../shared/Form.styled';
 import FormInput from '../shared/FormInput';
 import FormButton from '../shared/FormButton';
+import submittedFormLayout from '../shared/layout';
 
 const ContactForm = () => {
+  const { addContact } = useContext(InfoContext);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
   const {
-    value: emailValue,
+    value: email,
     isValueValid: isEmailValid,
     hasError: emailHasError,
     inputChangeHandler: emailChangeHandler,
@@ -14,7 +20,7 @@ const ContactForm = () => {
   } = useInput(validation.validateEmail);
 
   const {
-    value: phoneValue,
+    value: phone,
     isValueValid: isPhoneValid,
     hasError: phoneHasError,
     inputChangeHandler: phoneChangeHandler,
@@ -22,7 +28,7 @@ const ContactForm = () => {
   } = useInput(validation.validatePhone);
 
   const {
-    value: urlValue,
+    value: linkedin,
     isValueValid: isUrlValid,
     hasError: urlHasError,
     inputChangeHandler: urlChangeHandler,
@@ -31,8 +37,16 @@ const ContactForm = () => {
 
   const isFormValid = isEmailValid && isPhoneValid && isUrlValid;
 
-  return (
-    <StyledForm autoComplete="off">
+  const formSubmitHandler = (e) => {
+    e.preventDefault();
+    if (!isFormValid) return;
+
+    addContact({ email, phone, linkedin });
+    setIsSubmitted(true);
+  };
+
+  return !isSubmitted ? (
+    <StyledForm onSubmit={formSubmitHandler} autoComplete="off">
       <FormInput
         className={emailHasError && 'invalid'}
         errorMessage={errors.errorEmail}
@@ -41,7 +55,7 @@ const ContactForm = () => {
         label="Email"
         inputChange={emailChangeHandler}
         inputBlur={emailBlurHandler}
-        inputValue={emailValue}
+        inputValue={email}
         inputPlaceholder="boat@mcboatface.com"
         inputType="email"
         required
@@ -54,7 +68,7 @@ const ContactForm = () => {
         label="Phone Number"
         inputChange={phoneChangeHandler}
         inputBlur={phoneBlurHandler}
-        inputValue={phoneValue}
+        inputValue={phone}
         inputPlaceholder="eg. 44 1234 123456 (no spaces required)"
         inputType="tel"
         required
@@ -67,13 +81,15 @@ const ContactForm = () => {
         label="LinkedIn Profile"
         inputChange={urlChangeHandler}
         inputBlur={urlBlurHandler}
-        inputValue={urlValue}
+        inputValue={linkedin}
         inputPlaceholder="in/example-mcexample"
         inputType="text"
         required
       />
       <FormButton disabled={!isFormValid} />
     </StyledForm>
+  ) : (
+    submittedFormLayout('Contact details', () => setIsSubmitted(false))
   );
 };
 
