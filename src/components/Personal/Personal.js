@@ -29,7 +29,7 @@ const Personal = () => {
     <StyledSection marginTop="3rem">
       <h1>Personal Details</h1>
       <Container direction="row">
-        <PersonalForm checkSubmission={checkSubmissionHandler} />
+        <PersonalForm />
         <PersonalPhoto />
       </Container>
       {shouldToggleAppear}
