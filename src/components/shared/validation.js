@@ -32,7 +32,10 @@ export const validation = {
   validatetextAndSpaces: (string) => textAndWhitespaceRegex.test(string),
   validateOptional: (string) => optionalRegex.test(string),
   validateStartingDate: (date) => currentDate > new Date(date),
-  validateEndingDate: (date) => +currentYear + 6 > new Date(date).getFullYear(),
+  validateEndingDate: (date) =>
+    date === '' || +currentYear + 6 > new Date(date).getFullYear()
+      ? true
+      : false,
 };
 
 export const errors = {
