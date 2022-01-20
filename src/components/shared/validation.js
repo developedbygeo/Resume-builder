@@ -32,8 +32,8 @@ export const validation = {
   validatetextAndSpaces: (string) => textAndWhitespaceRegex.test(string),
   validateOptional: (string) => optionalRegex.test(string),
   validateStartingDate: (date) => currentDate > new Date(date),
-  validateEndingDate: (date) =>
-    date === '' || +currentYear + 6 > new Date(date).getFullYear()
+  validateEndingDate: (dateInput) =>
+    dateInput === '' || +currentYear + 6 > new Date(dateInput).getFullYear()
       ? true
       : false,
 };
@@ -49,8 +49,10 @@ export const errors = {
   errorJobTitle:
     'Please provide a valid job title consisting of at least 2 characters.',
   errorSchoolDesc: 'The education description may be up to 200 characters.',
-  errorDateFrom: 'Maximum range exceeded - please provide a correct date.',
+  errorDateFrom: 'That does not look right - please provide a valid date.',
   errorDateTo:
     'The end date cannot surpass the current year by 6 or more years.',
+  timeFrameTip: (field, verb) =>
+    `Tip: Select either the end of your ${field} or that you are currently ${verb} here to continue.`,
   errorDescription: 'A description is required. Please provide one.',
 };
