@@ -1,6 +1,6 @@
 import useInput from '../../hooks/useInput';
 import useForm from '../../hooks/useForm';
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import { InfoContext } from '../../store/infoContext';
 import StyledForm from '../shared/Form.styled';
 import FormInput from '../shared/FormInput';
