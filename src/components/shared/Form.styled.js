@@ -63,6 +63,10 @@ const StyledForm = styled.form`
   .invalid ~ p {
     color: #b40e0e;
     letter-spacing: 0.1rem;
+    font-weight: 600;
+  }
+  .tip {
+    color: #1e3657;
   }
 `;
 
