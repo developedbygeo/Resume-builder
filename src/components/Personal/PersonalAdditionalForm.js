@@ -1,4 +1,5 @@
 import useInput from '../../hooks/useInput';
+import useForm from '../../hooks/useForm';
 import { useContext, useState } from 'react';
 import { InfoContext } from '../../store/infoContext';
 import StyledForm from '../shared/Form.styled';
@@ -9,7 +10,8 @@ import submittedFormLayout from '../shared/layout';
 
 const PersonalAdditionalForm = ({ checkSubmission }) => {
   const { addAdditional } = useContext(InfoContext);
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitted, setIsSubmitted, formSubmissionHandler] =
+    useForm(addAdditional);
 
   const {
     value: country,
@@ -37,17 +39,23 @@ const PersonalAdditionalForm = ({ checkSubmission }) => {
 
   const isFormValid = isCountryValid && isCityValid && isPostalValid;
 
-  const formSubmitHandler = (e) => {
-    e.preventDefault();
-    if (!isFormValid) return;
-
-    addAdditional({ country, city, postal });
-    setIsSubmitted(true);
-    checkSubmission({ additionalForm: true });
-  };
+  const dispatchData = { country, city, postal };
 
   return !isSubmitted ? (
-    <StyledForm onSubmit={formSubmitHandler} autocomplete="off">
+    <StyledForm
+      onSubmit={(e) =>
+        formSubmissionHandler(
+          e,
+          isFormValid,
+          {
+            fn: checkSubmission,
+            data: { additionalForm: true },
+          },
+          dispatchData
+        )
+      }
+      autocomplete="off"
+    >
       <FormInput
         className={countryHasError && 'invalid'}
         errorMessage={errors.errorGeneric('country')}
