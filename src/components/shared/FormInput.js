@@ -1,30 +1,35 @@
+import React from 'react';
 import { Container } from './Container.styled';
 import { Label, Input } from './Input.styled';
 import Toggle from './Toggle/Toggle';
 
-const FormInput = ({
-  className,
-  errorMessage,
-  htmlFor,
-  label,
-  inputId,
-  inputChange,
-  inputBlur,
-  inputType,
-  inputValue,
-  inputPlaceholder,
-  required,
-  inputAs,
-  isToggle = false,
-  toggleTitle,
-  minConstraint,
-  maxConstraint,
-}) => {
+const FormInput = (
+  {
+    className,
+    errorMessage,
+    htmlFor,
+    label,
+    inputId,
+    inputChange,
+    inputBlur,
+    inputType,
+    inputValue,
+    inputPlaceholder,
+    required,
+    inputAs,
+    isToggle = false,
+    toggleTitle,
+    minConstraint,
+    maxConstraint,
+  },
+  ref
+) => {
   const standardLayout = (
     <Container>
       <Label htmlFor={htmlFor}>{label}</Label>
       <Input
         className={className}
+        ref={ref}
         id={inputId}
         onChange={inputChange}
         onBlur={inputBlur}
@@ -43,7 +48,13 @@ const FormInput = ({
   const toggleLayout = (
     <Container>
       <Label htmlFor={htmlFor}>{label}</Label>
-      <Toggle title={toggleTitle} id={inputId} onChange={inputChange} />
+      <Toggle
+        ref={ref}
+        title={toggleTitle}
+        id={inputId}
+        onChange={inputChange}
+      />
+      {className ? <p className="tip">{errorMessage}</p> : null}
     </Container>
   );
 
@@ -52,4 +63,4 @@ const FormInput = ({
   return layout;
 };
 
-export default FormInput;
+export default React.forwardRef(FormInput);
