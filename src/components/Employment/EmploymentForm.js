@@ -1,4 +1,7 @@
 import useInput from '../../hooks/useInput';
+import useToggle from '../../hooks/useToggle';
+import { InfoContext } from '../../store/infoContext';
+import { useContext, useRef, useState } from 'react';
 import {
   errors,
   validation,
@@ -9,18 +12,23 @@ import {
 import StyledForm from '../shared/Form.styled';
 import FormInput from '../shared/FormInput';
 import FormButton from '../shared/FormButton';
+import submittedFormLayout from '../shared/layout';
 
 const EmploymentForm = () => {
+  const { addEmployment } = useContext(InfoContext);
+  const currentToggleRef = useRef();
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
   const {
-    value: jobValue,
-    isValueValid: isJobValid,
-    hasError: jobHasError,
-    inputChangeHandler: jobChangeHandler,
-    inputBlurHandler: jobBlurHandler,
+    value: title,
+    isValueValid: isTitleValid,
+    hasError: titleHasError,
+    inputChangeHandler: titleChangeHandler,
+    inputBlurHandler: titleBlurHandler,
   } = useInput(validation.validateTextNumbers);
 
   const {
-    value: employerValue,
+    value: employer,
     isValueValid: isEmployerValid,
     hasError: employerHasError,
     inputChangeHandler: employerChangeHandler,
@@ -28,61 +36,76 @@ const EmploymentForm = () => {
   } = useInput(validation.validateTextNumbers);
 
   const {
-    value: startingDateValue,
-    isValueValid: isStartingDateValid,
-    hasError: startingDateHasError,
-    inputChangeHandler: startingDateChangeHandler,
-    inputBlurHandler: startingDateBlurHandler,
+    value: from,
+    isValueValid: isFromDateValid,
+    hasError: fromDateHasError,
+    inputChangeHandler: fromDateChangeHandler,
+    inputBlurHandler: fromDateBlurHandler,
   } = useInput(validation.validateStartingDate);
 
   const {
-    value: endDateValue,
-    isValueValid: isEndDateValid,
-    hasError: endDateHasError,
-    inputChangeHandler: endDateChangeHandler,
-    inputBlurHandler: endDateBlurHandler,
+    value: to,
+    isValueValid: isToDateValid,
+    hasError: toDateHasError,
+    inputChangeHandler: toDateChangeHandler,
+    inputBlurHandler: toDateBlurHandler,
   } = useInput(validation.validateEndingDate);
 
   const {
-    value: jobLocationValue,
-    isValueValid: isJobLocationValid,
-    hasError: jobLocationHasError,
-    inputChangeHandler: jobLocationChangeHandler,
-    inputBlurHandler: jobLocationBlurHandler,
+    value: location,
+    isValueValid: isLocationValid,
+    hasError: locationHasError,
+    inputChangeHandler: locationChangeHandler,
+    inputBlurHandler: locationBlurHandler,
   } = useInput(validation.validateGeneric);
 
   const {
-    value: jobDescriptionValue,
-    isValueValid: isJobDescriptionValid,
-    hasError: jobDescriptionHasError,
-    inputChangeHandler: jobDescriptionChangeHandler,
-    inputBlurHandler: jobDescriptionBlurHandler,
+    value: description,
+    isValueValid: isDescriptionValid,
+    hasError: descriptionHasError,
+    inputChangeHandler: descriptionChangeHandler,
+    inputBlurHandler: descriptionBlurHandler,
   } = useInput(validation.validateText);
+
+  const [endDateExists, toggleChangeHandler] = useToggle(to);
 
   const isFormValid =
     isEmployerValid &&
-    isJobValid &&
-    isStartingDateValid &&
-    isEndDateValid &&
-    isJobLocationValid &&
-    isJobDescriptionValid;
+    isTitleValid &&
+    isFromDateValid &&
+    isToDateValid &&
+    isLocationValid &&
+    isDescriptionValid &&
+    endDateExists;
 
   const formSubmitHandler = (e) => {
-    if (isFormValid) {
-    }
+    const endDate = to === '' ? 'present' : to;
+    e.preventDefault();
+    if (!isFormValid) return;
+
+    addEmployment({
+      title,
+      employer,
+      description,
+      location,
+      title,
+      from,
+      to: endDate,
+    });
+    setIsSubmitted(true);
   };
 
-  return (
-    <StyledForm autoComplete="off">
+  return !isSubmitted ? (
+    <StyledForm onSubmit={formSubmitHandler} autoComplete="off">
       <FormInput
-        className={jobHasError && 'invalid'}
+        className={titleHasError && 'invalid'}
         errorMessage={errors.errorGeneric('job title')}
         htmlFor="title"
         inputId="title"
         label="Job Title"
-        inputChange={jobChangeHandler}
-        inputBlur={jobBlurHandler}
-        inputValue={jobValue}
+        inputChange={titleChangeHandler}
+        inputBlur={titleBlurHandler}
+        inputValue={title}
         inputPlaceholder="eg. Software Engineer"
         inputType="text"
         required
@@ -95,67 +118,71 @@ const EmploymentForm = () => {
         label="Employer"
         inputChange={employerChangeHandler}
         inputBlur={employerBlurHandler}
-        inputValue={employerValue}
+        inputValue={employer}
         inputPlaceholder="eg. Google"
         inputType="text"
         required
       />
       <FormInput
-        className={startingDateHasError && 'invalid'}
+        className={fromDateHasError && 'invalid'}
         errorMessage={errors.errorDateFrom}
         htmlFor="startdate"
         inputId="startdate"
         label="From"
-        inputChange={startingDateChangeHandler}
-        inputBlur={startingDateBlurHandler}
-        inputValue={startingDateValue}
+        inputChange={fromDateChangeHandler}
+        inputBlur={fromDateBlurHandler}
+        inputValue={from}
         inputType="date"
         minConstraint={`${currentYear - 60}-01-01`}
         maxConstraint={`${currentYear}-${currentMonth}-${currentDay}`}
         required
       />
       <FormInput
-        className={endDateHasError && 'invalid'}
+        className={toDateHasError && 'invalid'}
         errorMessage={errors.errorDateTo}
         htmlFor="enddate"
         inputId="enddate"
         label="To"
-        inputChange={endDateChangeHandler}
-        inputBlur={endDateBlurHandler}
-        inputValue={endDateValue}
+        inputChange={toDateChangeHandler}
+        inputBlur={toDateBlurHandler}
+        inputValue={to}
         inputType="date"
         minConstraint={`${currentYear - 60}-01-01`}
         maxConstraint={`${currentYear + 5}-${currentMonth}-${currentDay}`}
       />
       <FormInput
-        className={jobLocationHasError && 'invalid'}
+        className={locationHasError && 'invalid'}
         errorMessage={errors.errorGeneric('location')}
         htmlFor="joblocation"
         inputId="joblocation"
         label="Location"
         inputPlaceholder="eg. Edinburgh"
-        inputChange={jobLocationChangeHandler}
-        inputBlur={jobLocationBlurHandler}
-        inputValue={jobLocationValue}
+        inputChange={locationChangeHandler}
+        inputBlur={locationBlurHandler}
+        inputValue={location}
         inputType="text"
         required
       />
       <FormInput
-        className={jobDescriptionHasError && 'invalid'}
+        className={descriptionHasError && 'invalid'}
         errorMessage={errors.errorTextarea('job description')}
         htmlFor="jobdescription"
         inputId="jobdescription"
         label="Description"
         inputPlaceholder="Briefly describe your tasks and accomplishments"
-        inputChange={jobDescriptionChangeHandler}
-        inputBlur={jobDescriptionBlurHandler}
-        inputValue={jobDescriptionValue}
+        inputChange={descriptionChangeHandler}
+        inputBlur={descriptionBlurHandler}
+        inputValue={description}
         inputType="text"
         inputAs="textarea"
         required
       />
       <FormInput
         isToggle={true}
+        inputChange={toggleChangeHandler}
+        className={!endDateExists && 'invalid'}
+        errorMessage={errors.timeFrameTip('employment', 'working')}
+        ref={currentToggleRef}
         toggleTitle="I am currently working here"
         htmlFor="stillHere"
         inputId="stillHere"
@@ -163,6 +190,8 @@ const EmploymentForm = () => {
       />
       <FormButton disabled={!isFormValid} />
     </StyledForm>
+  ) : (
+    submittedFormLayout('Employment details', () => setIsSubmitted(false))
   );
 };
 
