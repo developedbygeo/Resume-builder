@@ -20,7 +20,7 @@ const useToggle = (currentEndDate) => {
     );
   };
 
-  return [endDateExists, toggleChangeHandler];
+  return [endDateExists, toggleChangeHandler, isToggleActivated];
 };
 
 export default useToggle;
