@@ -1,61 +1,85 @@
+import { useContext, useRef } from 'react';
+import { InfoContext } from '../../store/infoContext';
+import useToggle from '../../hooks/useToggle';
 import useInput from '../../hooks/useInput';
-import { validation, errors } from '../shared/validation';
+import useForm from '../../hooks/useForm';
+import {
+  validation,
+  errors,
+  currentYear,
+  currentMonth,
+  currentDay,
+} from '../shared/validation';
 import StyledForm from '../shared/Form.styled';
 import FormInput from '../shared/FormInput';
 import FormButton from '../shared/FormButton';
-
-const validateText = (val) => val;
+import submittedFormLayout from '../shared/layout';
 
 const EducationForm = () => {
+  const { addEducation } = useContext(InfoContext);
+  const currentToggleRef = useRef();
+  const [isSubmitted, formSubmissionHandler, setIsSubmitted] = useForm(
+    addEducation,
+    true
+  );
+
   const {
-    value: schoolValue,
+    value: school,
     isValueValid: isSchoolValid,
     hasError: schoolHasError,
     inputChangeHandler: schoolChangeHandler,
     inputBlurHandler: schoolBlurHandler,
-  } = useInput(validation.validatetextAndSpaces);
+  } = useInput(validation.validateTextNumbers);
 
   const {
-    value: degreeValue,
+    value: degree,
     isValueValid: isDegreeValid,
     hasError: degreeHasError,
     inputChangeHandler: degreeChangeHandler,
     inputBlurHandler: degreeBlurHandler,
-  } = useInput(validation.validatetextAndSpaces);
+  } = useInput(validation.validateTextNumbers);
 
   const {
-    value: schoolStartValue,
-    isValueValid: isSchoolStartValid,
-    hasError: schoolStartHasError,
-    inputChangeHandler: schoolStartChangeHandler,
-    inputBlurHandler: schoolStartBlurHandler,
+    value: from,
+    isValueValid: isSchoolFromValid,
+    hasError: schoolFromHasError,
+    inputChangeHandler: schoolFromChangeHandler,
+    inputBlurHandler: schoolFromBlurHandler,
   } = useInput(validation.validateStartingDate);
 
   const {
-    value: schoolEndValue,
-    isValueValid: isSchoolEndValid,
-    hasError: schoolEndHasError,
-    inputChangeHandler: schoolEndChangeHandler,
-    inputBlurHandler: schoolEndBlurHandler,
+    value: to,
+    isValueValid: isSchoolToValid,
+    hasError: schoolToHasError,
+    inputChangeHandler: schoolToChangeHandler,
+    inputBlurHandler: schoolToBlurHandler,
   } = useInput(validation.validateEndingDate);
 
   const {
-    value: schoolDescValue,
-    isValueValid: isSchoolDescValid,
-    hasError: schoolDescHasError,
-    inputChangeHandler: schoolDescChangeHandler,
-    inputBlurHandler: schoolDescBlurHandler,
+    value: description,
+    isValueValid: isDescriptionValid,
+    hasError: descriptionHasError,
+    inputChangeHandler: descriptionChangeHandler,
+    inputBlurHandler: descriptionBlurHandler,
   } = useInput(validation.validateOptional);
+
+  const [endDateExists, toggleChangeHandler, isToggleActivated] = useToggle(to);
 
   const isFormValid =
     isSchoolValid &&
     isDegreeValid &&
-    isSchoolStartValid &&
-    isSchoolEndValid &&
-    isSchoolDescValid;
+    isSchoolFromValid &&
+    isSchoolToValid &&
+    isDescriptionValid &&
+    endDateExists;
 
-  return (
-    <StyledForm autoComplete="off">
+  const dispatchData = { school, degree, from, to, description };
+
+  return !isSubmitted ? (
+    <StyledForm
+      onSubmit={(e) => formSubmissionHandler(e, isFormValid, dispatchData)}
+      autoComplete="off"
+    >
       <FormInput
         className={schoolHasError && 'invalid'}
         errorMessage={errors.errorGeneric('school')}
@@ -64,7 +88,7 @@ const EducationForm = () => {
         label="School"
         inputChange={schoolChangeHandler}
         inputBlur={schoolBlurHandler}
-        inputValue={schoolValue}
+        inputValue={school}
         inputPlaceholder="eg. King's College"
         inputType="text"
         required
@@ -77,49 +101,55 @@ const EducationForm = () => {
         label="Degree"
         inputChange={degreeChangeHandler}
         inputBlur={degreeBlurHandler}
-        inputValue={degreeValue}
+        inputValue={degree}
         inputPlaceholder="eg. MSc Mechanical Engineering"
         inputType="text"
         required
       />
       <FormInput
-        className={schoolStartHasError && 'invalid'}
+        className={schoolFromHasError && 'invalid'}
         errorMessage={errors.errorDateFrom}
         htmlFor="educationfrom"
         inputId="educationfrom"
         label="From"
-        inputChange={schoolStartChangeHandler}
-        inputBlur={schoolStartBlurHandler}
-        inputValue={schoolStartValue}
+        inputChange={schoolFromChangeHandler}
+        inputBlur={schoolFromBlurHandler}
+        inputValue={from}
         inputType="date"
+        minConstraint={`${currentYear - 60}-01-01`}
+        maxConstraint={`${currentYear}-${currentMonth}-${currentDay}`}
         required
       />
       <FormInput
-        className={schoolEndHasError && 'invalid'}
+        className={schoolToHasError && 'invalid'}
         errorMessage={errors.errorDateTo}
         htmlFor="educationto"
         inputId="educationto"
         label="To"
-        inputChange={schoolEndChangeHandler}
-        inputBlur={schoolEndBlurHandler}
-        inputValue={schoolEndValue}
+        inputChange={schoolToChangeHandler}
+        inputBlur={schoolToBlurHandler}
+        inputValue={to}
         inputType="date"
-        required
       />
       <FormInput
-        className={schoolDescHasError && 'invalid'}
+        className={descriptionHasError && 'invalid'}
         errorMessage={errors.errorSchoolDesc}
         htmlFor="edudescription"
         inputId="edudescription"
         label="Description"
-        inputChange={schoolDescChangeHandler}
-        inputBlur={schoolDescBlurHandler}
-        inputValue={schoolDescValue}
+        inputChange={descriptionChangeHandler}
+        inputBlur={descriptionBlurHandler}
+        inputValue={description}
         inputAs="textarea"
         inputPlaceholder="(Optional) Can include information such as: Graduated with Honors/Distinction, majored in Engineering, GPA, etc. Up to 200 characters"
       />
       <FormInput
         isToggle={true}
+        inputChange={toggleChangeHandler}
+        inputChecked={isToggleActivated}
+        className={!endDateExists && 'invalid'}
+        errorMessage={errors.timeFrameTip('education', 'studying')}
+        ref={currentToggleRef}
         toggleTitle="I am still studying here"
         htmlFor="currentlyStudying"
         inputId="currentlyStudying"
@@ -127,6 +157,8 @@ const EducationForm = () => {
       />
       <FormButton disabled={!isFormValid} />
     </StyledForm>
+  ) : (
+    submittedFormLayout('Education details', () => setIsSubmitted(false))
   );
 };
 
