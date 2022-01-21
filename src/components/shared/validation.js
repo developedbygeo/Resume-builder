@@ -11,7 +11,7 @@ export const currentDay =
     ? `0${currentDate.getDate()}`
     : currentDate.getDate();
 
-const nameRegex = /^[a-z]{2,50}$/i;
+const nameRegex = /^[a-z\s\.\,]{2,50}$/i;
 const textareaRegex = /^[a-z0-9\W]{50,}$/i;
 const generalRegex = /^[\w\W]{2,}$/i;
 const optionalRegex = /^[\w\W]{0,200}$/i;
