@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const useForm = (dispatchFn) => {
+const useForm = (dispatchFn, includesDate = false) => {
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const formSubmissionHandler = (
@@ -11,8 +11,13 @@ const useForm = (dispatchFn) => {
   ) => {
     e.preventDefault();
     if (!isFormValid) return;
-
-    dispatchFn(dispatchData);
+    if (includesDate) {
+      const endDate = dispatchData.to === '' ? 'present' : dispatchData.to;
+      const updatedData = { ...dispatchData, to: endDate };
+      dispatchFn(updatedData);
+    } else {
+      dispatchFn(dispatchData);
+    }
     setIsSubmitted(true);
     if (transmitParent) {
       transmitParent.fn(transmitParent.data);
