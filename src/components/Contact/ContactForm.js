@@ -1,5 +1,6 @@
 import useInput from '../../hooks/useInput';
-import { useContext, useState } from 'react';
+import useForm from '../../hooks/useForm';
+import { useContext } from 'react';
 import { InfoContext } from '../../store/infoContext';
 import { errors, validation } from '../shared/validation';
 import StyledForm from '../shared/Form.styled';
@@ -9,7 +10,8 @@ import submittedFormLayout from '../shared/layout';
 
 const ContactForm = () => {
   const { addContact } = useContext(InfoContext);
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitted, formSubmissionHandler, setIsSubmitted] =
+    useForm(addContact);
 
   const {
     value: email,
@@ -37,16 +39,13 @@ const ContactForm = () => {
 
   const isFormValid = isEmailValid && isPhoneValid && isUrlValid;
 
-  const formSubmitHandler = (e) => {
-    e.preventDefault();
-    if (!isFormValid) return;
-
-    addContact({ email, phone, linkedin });
-    setIsSubmitted(true);
-  };
+  const dispatchData = { email, phone, linkedin };
 
   return !isSubmitted ? (
-    <StyledForm onSubmit={formSubmitHandler} autoComplete="off">
+    <StyledForm
+      onSubmit={(e) => formSubmissionHandler(e, isFormValid, dispatchData)}
+      autoComplete="off"
+    >
       <FormInput
         className={emailHasError && 'invalid'}
         errorMessage={errors.errorEmail}
