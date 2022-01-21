@@ -10,7 +10,8 @@ import submittedFormLayout from '../shared/layout';
 
 const PersonalForm = () => {
   const { addPersonal } = useContext(InfoContext);
-  const [isSubmitted, formSubmissionHandler] = useForm(addPersonal);
+  const [isSubmitted, formSubmissionHandler, setIsSubmitted] =
+    useForm(addPersonal);
 
   const {
     value: firstName,
