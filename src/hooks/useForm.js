@@ -6,8 +6,8 @@ const useForm = (dispatchFn) => {
   const formSubmissionHandler = (
     e,
     isFormValid,
-    transmitParent = null,
-    dispatchData
+    dispatchData,
+    transmitParent = null
   ) => {
     e.preventDefault();
     if (!isFormValid) return;
