@@ -10,7 +10,7 @@ import submittedFormLayout from '../shared/layout';
 
 const PersonalAdditionalForm = ({ checkSubmission }) => {
   const { addAdditional } = useContext(InfoContext);
-  const [isSubmitted, setIsSubmitted, formSubmissionHandler] =
+  const [isSubmitted, formSubmissionHandler, setIsSubmitted] =
     useForm(addAdditional);
 
   const {
