@@ -31,7 +31,6 @@ const defaultState = {
       to: '',
       location: '',
       description: '',
-      currentStatus: false,
     },
     education: {
       school: '',
@@ -39,7 +38,6 @@ const defaultState = {
       from: '',
       to: '',
       description: '',
-      currentStatus: false,
     },
   },
   status: {
