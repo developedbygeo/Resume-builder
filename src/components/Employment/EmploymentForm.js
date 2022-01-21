@@ -1,7 +1,8 @@
 import useInput from '../../hooks/useInput';
+import useForm from '../../hooks/useForm';
 import useToggle from '../../hooks/useToggle';
 import { InfoContext } from '../../store/infoContext';
-import { useContext, useRef, useState } from 'react';
+import { useContext, useRef } from 'react';
 import {
   errors,
   validation,
@@ -17,7 +18,10 @@ import submittedFormLayout from '../shared/layout';
 const EmploymentForm = () => {
   const { addEmployment } = useContext(InfoContext);
   const currentToggleRef = useRef();
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitted, formSubmissionHandler, setIsSubmitted] = useForm(
+    addEmployment,
+    true
+  );
 
   const {
     value: title,
@@ -67,7 +71,7 @@ const EmploymentForm = () => {
     inputBlurHandler: descriptionBlurHandler,
   } = useInput(validation.validateText);
 
-  const [endDateExists, toggleChangeHandler] = useToggle(to);
+  const [endDateExists, toggleChangeHandler, isToggleActivated] = useToggle(to);
 
   const isFormValid =
     isEmployerValid &&
@@ -78,25 +82,13 @@ const EmploymentForm = () => {
     isDescriptionValid &&
     endDateExists;
 
-  const formSubmitHandler = (e) => {
-    const endDate = to === '' ? 'present' : to;
-    e.preventDefault();
-    if (!isFormValid) return;
-
-    addEmployment({
-      title,
-      employer,
-      description,
-      location,
-      title,
-      from,
-      to: endDate,
-    });
-    setIsSubmitted(true);
-  };
+  const dispatchData = { title, employer, description, location, from, to };
 
   return !isSubmitted ? (
-    <StyledForm onSubmit={formSubmitHandler} autoComplete="off">
+    <StyledForm
+      onSubmit={(e) => formSubmissionHandler(e, isFormValid, dispatchData)}
+      autoComplete="off"
+    >
       <FormInput
         className={titleHasError && 'invalid'}
         errorMessage={errors.errorGeneric('job title')}
@@ -180,6 +172,7 @@ const EmploymentForm = () => {
       <FormInput
         isToggle={true}
         inputChange={toggleChangeHandler}
+        inputChecked={isToggleActivated}
         className={!endDateExists && 'invalid'}
         errorMessage={errors.timeFrameTip('employment', 'working')}
         ref={currentToggleRef}
