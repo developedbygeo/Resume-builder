@@ -44,15 +44,10 @@ const PersonalAdditionalForm = ({ checkSubmission }) => {
   return !isSubmitted ? (
     <StyledForm
       onSubmit={(e) =>
-        formSubmissionHandler(
-          e,
-          isFormValid,
-          {
-            fn: checkSubmission,
-            data: { additionalForm: true },
-          },
-          dispatchData
-        )
+        formSubmissionHandler(e, isFormValid, dispatchData, {
+          fn: checkSubmission,
+          data: { additionalForm: true },
+        })
       }
       autocomplete="off"
     >
