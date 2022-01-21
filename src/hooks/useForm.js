@@ -19,7 +19,7 @@ const useForm = (dispatchFn) => {
     }
   };
 
-  return [isSubmitted, setIsSubmitted, formSubmissionHandler];
+  return [isSubmitted, formSubmissionHandler, setIsSubmitted];
 };
 
 export default useForm;
