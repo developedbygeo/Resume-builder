@@ -14,6 +14,7 @@ const FormInput = (
     inputBlur,
     inputType,
     inputValue,
+    inputChecked,
     inputPlaceholder,
     required,
     inputAs,
@@ -53,6 +54,7 @@ const FormInput = (
         title={toggleTitle}
         id={inputId}
         onChange={inputChange}
+        checked={inputChecked}
       />
       {className ? <p className="tip">{errorMessage}</p> : null}
     </Container>
