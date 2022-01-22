@@ -51,17 +51,22 @@ const defaultState = {
 
 const informationReducer = (state = defaultState, action) => {
   const currentSnapshot = _.cloneDeep(state);
-  const { type, payload } = action;
+  const { type, payload, identifier } = action;
   const {
     status,
+    information,
     information: { personal, additional, contact, employment, education },
   } = currentSnapshot;
+
+  const isOneEmploymentObj =
+    Object.keys(information).filter((key) => key.includes('employ')).length ===
+    1;
 
   switch (type) {
     case 'ADD_PERSONAL': {
       _.assign(personal, payload);
       status.personal = true;
-      return { ...currentSnapshot };
+      return currentSnapshot;
     }
     case 'ADD_ADDITIONAL': {
       _.assign(additional, payload);
@@ -75,13 +80,22 @@ const informationReducer = (state = defaultState, action) => {
     }
     case 'ADD_EMPLOYMENT': {
       // TODO might have to check for originals & extra
-      _.assign(employment, payload);
-      status.employment = true;
+      if (employment.title !== '') {
+        information[`employment_${identifier}`] = payload;
+        information[`employment_${identifier}`].key = identifier;
+      }
+      if (isOneEmploymentObj) {
+        _.assign(employment, payload);
+        status.employment = true;
+      }
       return { ...currentSnapshot };
     }
     case 'ADD_EDUCATION': {
       _.assign(education, payload);
       status.education = true;
+      return { ...currentSnapshot };
+    }
+    default: {
       return { ...currentSnapshot };
     }
     // case 'EXTRA_EMPLOYMENT': {
@@ -110,8 +124,8 @@ const InformationProvider = ({ children }) => {
   const addContactHandler = (details) => {
     dispatchFn({ type: 'ADD_CONTACT', payload: details });
   };
-  const addEmploymentHandler = (details) => {
-    dispatchFn({ type: 'ADD_EMPLOYMENT', payload: details });
+  const addEmploymentHandler = (details, identifier) => {
+    dispatchFn({ type: 'ADD_EMPLOYMENT', payload: details, identifier });
   };
   const addEducationHandler = (details) => {
     dispatchFn({ type: 'ADD_EDUCATION', payload: details });
@@ -121,7 +135,7 @@ const InformationProvider = ({ children }) => {
   };
 
   const defaultValues = {
-    defaultState,
+    defaultState: currentState,
     addPersonal: addPersonalHandler,
     addAdditional: addAdditionalHandler,
     addContact: addContactHandler,
