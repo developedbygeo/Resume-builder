@@ -7,7 +7,8 @@ const useForm = (dispatchFn, includesDate = false) => {
     e,
     isFormValid,
     dispatchData,
-    transmitParent = null
+    transmitParent = null,
+    identifier = null
   ) => {
     e.preventDefault();
     if (!isFormValid) return;
@@ -15,7 +16,11 @@ const useForm = (dispatchFn, includesDate = false) => {
     if (includesDate) {
       const endDate = dispatchData.to === '' ? 'present' : dispatchData.to;
       const updatedData = { ...dispatchData, to: endDate };
-      dispatchFn(updatedData);
+      if (identifier) {
+        dispatchFn(updatedData, identifier);
+      } else {
+        dispatchFn(updatedData);
+      }
     } else {
       dispatchFn(dispatchData);
     }
@@ -26,7 +31,7 @@ const useForm = (dispatchFn, includesDate = false) => {
     }
     // else, submits true to parent
     if (transmitParent && typeof transmitParent === 'function') {
-      transmitParent(true);
+      transmitParent(identifier);
     }
   };
 
