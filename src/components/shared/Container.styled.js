@@ -28,7 +28,6 @@ export const StyledSection = styled.section`
   padding-bottom: 3rem;
 
   .grid {
-    display: grid;
     & > button {
       grid-row: 999;
       justify-self: center;
