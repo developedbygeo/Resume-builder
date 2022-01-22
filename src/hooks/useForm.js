@@ -11,6 +11,7 @@ const useForm = (dispatchFn, includesDate = false) => {
   ) => {
     e.preventDefault();
     if (!isFormValid) return;
+    // infers the end date
     if (includesDate) {
       const endDate = dispatchData.to === '' ? 'present' : dispatchData.to;
       const updatedData = { ...dispatchData, to: endDate };
@@ -19,8 +20,13 @@ const useForm = (dispatchFn, includesDate = false) => {
       dispatchFn(dispatchData);
     }
     setIsSubmitted(true);
-    if (transmitParent) {
+    // if object, calls the funcction on the data
+    if (transmitParent && typeof transmitParent === 'object') {
       transmitParent.fn(transmitParent.data);
+    }
+    // else, submits true to parent
+    if (transmitParent && typeof transmitParent === 'function') {
+      transmitParent(true);
     }
   };
 
