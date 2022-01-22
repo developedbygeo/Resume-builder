@@ -15,7 +15,7 @@ import FormInput from '../shared/FormInput';
 import FormButton from '../shared/FormButton';
 import submittedFormLayout from '../shared/layout';
 
-const EmploymentForm = () => {
+const EmploymentForm = ({ submissionCheck, identifier = null }) => {
   const { addEmployment } = useContext(InfoContext);
   const currentToggleRef = useRef();
   const [isSubmitted, formSubmissionHandler, setIsSubmitted] = useForm(
@@ -86,7 +86,15 @@ const EmploymentForm = () => {
 
   return !isSubmitted ? (
     <StyledForm
-      onSubmit={(e) => formSubmissionHandler(e, isFormValid, dispatchData)}
+      onSubmit={(e) =>
+        formSubmissionHandler(
+          e,
+          isFormValid,
+          dispatchData,
+          submissionCheck,
+          identifier
+        )
+      }
       autoComplete="off"
     >
       <FormInput
