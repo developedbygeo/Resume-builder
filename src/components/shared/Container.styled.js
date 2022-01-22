@@ -20,11 +20,20 @@ export const LayoutContainer = styled(Container)`
 `;
 
 export const StyledSection = styled.section`
+  display: grid;
   height: auto;
   width: 100%;
   margin-top: ${({ marginTop }) => marginTop || '0'};
   border-bottom: 2px solid ${({ theme }) => theme.colors.gray};
   padding-bottom: 3rem;
+
+  .grid {
+    display: grid;
+    & > button {
+      grid-row: 999;
+      justify-self: center;
+    }
+  }
 
   .editContainer {
     justify-content: space-between;
