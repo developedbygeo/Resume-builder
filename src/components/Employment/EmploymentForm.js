@@ -15,7 +15,7 @@ import FormInput from '../shared/FormInput';
 import FormButton from '../shared/FormButton';
 import submittedFormLayout from '../shared/layout';
 
-const EmploymentForm = ({ submissionCheck, identifier = null }) => {
+const EmploymentForm = ({ submissionCheck, identifier = null, values }) => {
   const { addEmployment } = useContext(InfoContext);
   const currentToggleRef = useRef();
   const [isSubmitted, formSubmissionHandler, setIsSubmitted] = useForm(
@@ -25,6 +25,7 @@ const EmploymentForm = ({ submissionCheck, identifier = null }) => {
 
   const {
     value: title,
+    setValue: setTitle,
     isValueValid: isTitleValid,
     hasError: titleHasError,
     inputChangeHandler: titleChangeHandler,
@@ -33,6 +34,7 @@ const EmploymentForm = ({ submissionCheck, identifier = null }) => {
 
   const {
     value: employer,
+    setValue: setEmployer,
     isValueValid: isEmployerValid,
     hasError: employerHasError,
     inputChangeHandler: employerChangeHandler,
@@ -41,6 +43,7 @@ const EmploymentForm = ({ submissionCheck, identifier = null }) => {
 
   const {
     value: from,
+    setValue: setFrom,
     isValueValid: isFromDateValid,
     hasError: fromDateHasError,
     inputChangeHandler: fromDateChangeHandler,
@@ -49,6 +52,7 @@ const EmploymentForm = ({ submissionCheck, identifier = null }) => {
 
   const {
     value: to,
+    setValue: setTo,
     isValueValid: isToDateValid,
     hasError: toDateHasError,
     inputChangeHandler: toDateChangeHandler,
@@ -57,6 +61,7 @@ const EmploymentForm = ({ submissionCheck, identifier = null }) => {
 
   const {
     value: location,
+    setValue: setLocation,
     isValueValid: isLocationValid,
     hasError: locationHasError,
     inputChangeHandler: locationChangeHandler,
@@ -65,11 +70,22 @@ const EmploymentForm = ({ submissionCheck, identifier = null }) => {
 
   const {
     value: description,
+    setValue: setDescription,
     isValueValid: isDescriptionValid,
     hasError: descriptionHasError,
     inputChangeHandler: descriptionChangeHandler,
     inputBlurHandler: descriptionBlurHandler,
   } = useInput(validation.validateText);
+
+  if (values) {
+    setTitle(values.title);
+    setEmployer(values.employer);
+    setFrom(values.from);
+    setTo(values.to);
+    setLocation(values.location);
+    setDescription(values.description);
+    setIsSubmitted(true);
+  }
 
   const [endDateExists, toggleChangeHandler, isToggleActivated] = useToggle(to);
 
