@@ -6,63 +6,34 @@ import { AddMoreDetails } from '../shared/Button.styled';
 import EmploymentForm from './EmploymentForm';
 
 const Employment = () => {
-  // const {
-  //   information: { employment },
-  // } = useContext(InfoContext);
-  const ctx = useContext(InfoContext);
+  const {
+    defaultState: { information },
+  } = useContext(InfoContext);
   const [originalFormSubmitted, setOriginalFormSubmitted] = useState(false);
   const [showButton, setShowButton] = useState(false);
-  const [showNewForm, setShowNewForm] = useState(false);
-  // const additionalForm = (<EmploymentForm />)
-  // or map a state object and add forms based on that
+  const [additionalForms, setAdditionalForms] = useState([]);
 
-  // useEffect(() => {
-  //   const currentKeys = Object.keys(information).filter((key) =>
-  //     key.includes('_emp')
-  //   );
-  //   console.log(currentKeys);
-  // }, [information]);
-
-  // const submissionIdentifier = Object.keys(information).filter((key) =>
-  //   key.includes('employ')
-  // ).length;
-
-  // const data = currentKeys.map((key) => key);
-  // _.find(information, key));
-  // console.log('reevaluated');
-  // console.log(ctx);
-
-  // const formsToBeRendered = currentKeys.map((form) => {
-  //   const forms = currentKeys.map((form) => information[form]);
-  //   console.log(forms);
-  //   // can destructure here
-
-  //   return (
-  //     <Container direction="row">
-  //       <EmploymentForm
-  //         submissionCheck={extraFormsSubmissionHandler}
-  //         identifier={`emp-${submissionIdentifier + 1}`}
-  //         // existingValues =
-  //       />
-  //     </Container>
-  //   );
-  // });
+  const submissionIdentifier = Object.keys(information).filter((key) =>
+    key.includes('employ')
+  ).length;
 
   const submissionHandler = () => {
     setOriginalFormSubmitted(true);
     setShowButton(true);
   };
+  const extraFormsSubmissionHandler = () => {
+    setShowButton(true);
+  };
 
   const addNewHandler = () => {
     setShowButton(false);
-    setShowNewForm(true);
-  };
-
-  const extraFormsSubmissionHandler = (identifier) => {
-    setShowButton(true);
-    console.log(identifier);
-    // console.log(currentlySubForms);
-    // setShowNewForm(false)
+    setAdditionalForms((prevState) => [
+      ...prevState,
+      <EmploymentForm
+        submissionCheck={extraFormsSubmissionHandler}
+        identifier={`emp-${submissionIdentifier + 1}`}
+      />,
+    ]);
   };
 
   const addNewFormBtn = originalFormSubmitted && showButton && (
@@ -71,14 +42,11 @@ const Employment = () => {
     </AddMoreDetails>
   );
 
-  const additionalForm = showNewForm && (
-    <Container direction="row">
-      <EmploymentForm
-        submissionCheck={extraFormsSubmissionHandler}
-        identifier={`emp-${submissionIdentifier + 1}`}
-      />
+  const additionalForm = additionalForms.map((form, index) => (
+    <Container direction="row" key={index}>
+      {form}
     </Container>
-  );
+  ));
 
   return (
     <StyledSection>
