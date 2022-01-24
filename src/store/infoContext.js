@@ -58,10 +58,6 @@ const informationReducer = (state = defaultState, action) => {
     information: { personal, additional, contact, employment, education },
   } = currentSnapshot;
 
-  const isOneEmploymentObj =
-    Object.keys(information).filter((key) => key.includes('employ')).length ===
-    1;
-
   switch (type) {
     case 'ADD_PERSONAL': {
       _.assign(personal, payload);
@@ -79,14 +75,12 @@ const informationReducer = (state = defaultState, action) => {
       return { ...currentSnapshot };
     }
     case 'ADD_EMPLOYMENT': {
-      // TODO might have to check for originals & extra
-      if (employment.title !== '') {
-        information[`employment_${identifier}`] = payload;
-        information[`employment_${identifier}`].key = identifier;
-      }
-      if (isOneEmploymentObj) {
+      if (employment.title === '') {
         _.assign(employment, payload);
         status.employment = true;
+      } else {
+        information[`employment_${identifier}`] = payload;
+        information[`employment_${identifier}`].key = identifier;
       }
       return { ...currentSnapshot };
     }
@@ -98,14 +92,6 @@ const informationReducer = (state = defaultState, action) => {
     default: {
       return { ...currentSnapshot };
     }
-    // case 'EXTRA_EMPLOYMENT': {
-    //   // setting the new key
-    //   const newKey = Object.keys(information).filter((key) =>
-    //     key.includes('employ')
-    //   ).length;
-    //   information[`employment${newKey}`] = payload;
-    //   return { ...currentSnapshot };
-    // }
   }
 };
 
@@ -130,9 +116,6 @@ const InformationProvider = ({ children }) => {
   const addEducationHandler = (details) => {
     dispatchFn({ type: 'ADD_EDUCATION', payload: details });
   };
-  const extraEmploymentHandler = (details) => {
-    dispatchFn({ type: `EXTRA_EMPLOYMENT`, payload: details });
-  };
 
   const defaultValues = {
     defaultState: currentState,
@@ -141,7 +124,6 @@ const InformationProvider = ({ children }) => {
     addContact: addContactHandler,
     addEmployment: addEmploymentHandler,
     addEducation: addEducationHandler,
-    addExtraEmployment: extraEmploymentHandler,
   };
 
   return (
