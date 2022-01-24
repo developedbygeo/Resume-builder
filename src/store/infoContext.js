@@ -67,30 +67,31 @@ const informationReducer = (state = defaultState, action) => {
     case 'ADD_ADDITIONAL': {
       _.assign(additional, payload);
       status.additional = true;
-      return { ...currentSnapshot };
+      return currentSnapshot;
     }
     case 'ADD_CONTACT': {
       _.assign(contact, payload);
       status.contact = true;
-      return { ...currentSnapshot };
+      return currentSnapshot;
     }
     case 'ADD_EMPLOYMENT': {
-      if (employment.title === '') {
+      // runtime check if its the original
+      if (employment.title === '' || !identifier) {
         _.assign(employment, payload);
         status.employment = true;
       } else {
         information[`employment_${identifier}`] = payload;
         information[`employment_${identifier}`].key = identifier;
       }
-      return { ...currentSnapshot };
+      return currentSnapshot;
     }
     case 'ADD_EDUCATION': {
       _.assign(education, payload);
       status.education = true;
-      return { ...currentSnapshot };
+      return currentSnapshot;
     }
     default: {
-      return { ...currentSnapshot };
+      return currentSnapshot;
     }
   }
 };
