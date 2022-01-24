@@ -27,11 +27,9 @@ export const StyledSection = styled.section`
   border-bottom: 2px solid ${({ theme }) => theme.colors.gray};
   padding-bottom: 3rem;
 
-  .grid {
-    & > button {
-      grid-row: 999;
-      justify-self: center;
-    }
+  & > button {
+    grid-row: 999;
+    justify-self: flex-start;
   }
 
   .editContainer {
