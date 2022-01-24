@@ -15,7 +15,7 @@ import FormInput from '../shared/FormInput';
 import FormButton from '../shared/FormButton';
 import submittedFormLayout from '../shared/layout';
 
-const EmploymentForm = ({ submissionCheck, identifier = null, values }) => {
+const EmploymentForm = ({ submissionCheck, identifier = null }) => {
   const { addEmployment } = useContext(InfoContext);
   const currentToggleRef = useRef();
   const [isSubmitted, formSubmissionHandler, setIsSubmitted] = useForm(
@@ -76,16 +76,6 @@ const EmploymentForm = ({ submissionCheck, identifier = null, values }) => {
     inputChangeHandler: descriptionChangeHandler,
     inputBlurHandler: descriptionBlurHandler,
   } = useInput(validation.validateText);
-
-  if (values) {
-    setTitle(values.title);
-    setEmployer(values.employer);
-    setFrom(values.from);
-    setTo(values.to);
-    setLocation(values.location);
-    setDescription(values.description);
-    setIsSubmitted(true);
-  }
 
   const [endDateExists, toggleChangeHandler, isToggleActivated] = useToggle(to);
 
