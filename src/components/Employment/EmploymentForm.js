@@ -25,7 +25,6 @@ const EmploymentForm = ({ submissionCheck, identifier = null }) => {
 
   const {
     value: title,
-    setValue: setTitle,
     isValueValid: isTitleValid,
     hasError: titleHasError,
     inputChangeHandler: titleChangeHandler,
@@ -34,7 +33,6 @@ const EmploymentForm = ({ submissionCheck, identifier = null }) => {
 
   const {
     value: employer,
-    setValue: setEmployer,
     isValueValid: isEmployerValid,
     hasError: employerHasError,
     inputChangeHandler: employerChangeHandler,
@@ -43,7 +41,6 @@ const EmploymentForm = ({ submissionCheck, identifier = null }) => {
 
   const {
     value: from,
-    setValue: setFrom,
     isValueValid: isFromDateValid,
     hasError: fromDateHasError,
     inputChangeHandler: fromDateChangeHandler,
@@ -52,7 +49,6 @@ const EmploymentForm = ({ submissionCheck, identifier = null }) => {
 
   const {
     value: to,
-    setValue: setTo,
     isValueValid: isToDateValid,
     hasError: toDateHasError,
     inputChangeHandler: toDateChangeHandler,
@@ -61,7 +57,6 @@ const EmploymentForm = ({ submissionCheck, identifier = null }) => {
 
   const {
     value: location,
-    setValue: setLocation,
     isValueValid: isLocationValid,
     hasError: locationHasError,
     inputChangeHandler: locationChangeHandler,
@@ -70,7 +65,6 @@ const EmploymentForm = ({ submissionCheck, identifier = null }) => {
 
   const {
     value: description,
-    setValue: setDescription,
     isValueValid: isDescriptionValid,
     hasError: descriptionHasError,
     inputChangeHandler: descriptionChangeHandler,
