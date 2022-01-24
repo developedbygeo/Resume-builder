@@ -19,9 +19,11 @@ const Personal = () => {
     }
   };
 
+  const toggleIcon = toggleMoreDetails ? '▲' : '▼';
+
   const shouldToggleAppear = !additionalFormSubmitted && (
     <AddMoreDetails onClick={moreDetailsHandler}>
-      Toggle additional details ▼
+      Toggle additional details {toggleIcon}
     </AddMoreDetails>
   );
 
