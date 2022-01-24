@@ -25,7 +25,7 @@ const useForm = (dispatchFn, includesDate = false) => {
       dispatchFn(dispatchData);
     }
     setIsSubmitted(true);
-    // if object, calls the funcction on the data
+    // if object, calls the function on the data
     if (transmitParent && typeof transmitParent === 'object') {
       transmitParent.fn(transmitParent.data);
     }
