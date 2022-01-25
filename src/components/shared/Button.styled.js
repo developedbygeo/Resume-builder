@@ -8,7 +8,7 @@ export const Button = styled.button`
   text-align: center;
   border: none;
   outline: none;
-  transition: all 250ms ease-in-out;
+  transition: all 100ms ease-in-out;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   width: ${({ buttonWidth }) => buttonWidth || 'auto'};
   background: ${({ buttonBg }) => buttonBg || 'inherit'};
