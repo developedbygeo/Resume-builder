@@ -48,7 +48,7 @@ const StyledForm = styled.form`
   & button {
     width: ${({ buttonWidth }) => buttonWidth || '10rem'};
     height: 4.5rem;
-    transition: all 250ms ease-in-out;
+    transition: all 100ms ease-in-out;
   }
   & button:disabled {
     cursor: not-allowed;
