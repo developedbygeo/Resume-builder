@@ -86,8 +86,13 @@ const informationReducer = (state = defaultState, action) => {
       return currentSnapshot;
     }
     case 'ADD_EDUCATION': {
-      _.assign(education, payload);
-      status.education = true;
+      if (education.degree === '' || !identifier) {
+        _.assign(education, payload);
+        status.education = true;
+      } else {
+        information[`education_${identifier}`] = payload;
+        information[`education_${identifier}`].key = identifier;
+      }
       return currentSnapshot;
     }
     default: {
@@ -114,8 +119,8 @@ const InformationProvider = ({ children }) => {
   const addEmploymentHandler = (details, identifier) => {
     dispatchFn({ type: 'ADD_EMPLOYMENT', payload: details, identifier });
   };
-  const addEducationHandler = (details) => {
-    dispatchFn({ type: 'ADD_EDUCATION', payload: details });
+  const addEducationHandler = (details, identifier) => {
+    dispatchFn({ type: 'ADD_EDUCATION', payload: details, identifier });
   };
 
   const defaultValues = {
