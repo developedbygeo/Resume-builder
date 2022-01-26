@@ -15,7 +15,7 @@ import FormInput from '../shared/FormInput';
 import FormButton from '../shared/FormButton';
 import submittedFormLayout from '../shared/layout';
 
-const EducationForm = () => {
+const EducationForm = ({ submissionCheck, identifier = null }) => {
   const { addEducation } = useContext(InfoContext);
   const currentToggleRef = useRef();
   const [isSubmitted, formSubmissionHandler, setIsSubmitted] = useForm(
@@ -77,7 +77,15 @@ const EducationForm = () => {
 
   return !isSubmitted ? (
     <StyledForm
-      onSubmit={(e) => formSubmissionHandler(e, isFormValid, dispatchData)}
+      onSubmit={(e) =>
+        formSubmissionHandler(
+          e,
+          isFormValid,
+          dispatchData,
+          submissionCheck,
+          identifier
+        )
+      }
       autoComplete="off"
     >
       <FormInput
