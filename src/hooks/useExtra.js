@@ -24,7 +24,8 @@ const useExtra = (componentIdentifier) => {
 
   const ctxIdentifier = componentIdentifier === 'employment' ? 'employ' : 'edu';
 
-  const buttonText = ctxIdentifier === 'employ' ? 'employment' : 'education';
+  const buttonText =
+    componentIdentifier === 'employment' ? componentIdentifier : 'education';
 
   const newFormIdentifier = Object.keys(information).filter((key) =>
     key.includes(ctxIdentifier)
