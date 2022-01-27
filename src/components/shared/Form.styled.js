@@ -66,8 +66,14 @@ const StyledForm = styled.form`
     font-weight: 600;
     margin-top: 1rem;
   }
-  .tip {
+  .tip,
+  .counter {
     color: #1e3657;
+  }
+  .counter {
+    width: 95%;
+    margin: auto;
+    text-align: end;
   }
 `;
 
