@@ -145,11 +145,13 @@ const EducationForm = ({ submissionCheck, identifier = null }) => {
         htmlFor="edudescription"
         inputId="edudescription"
         label="Description"
+        contPosition="relative"
         inputChange={descriptionChangeHandler}
         inputBlur={descriptionBlurHandler}
         inputValue={description}
+        needsCounter={500}
         inputAs="textarea"
-        inputPlaceholder="(Optional) Can include information such as: Graduated with Honors/Distinction, majored in Engineering, GPA, etc. Up to 200 characters"
+        inputPlaceholder="(Optional) Can include information such as: Graduated with Honors/Distinction, majored in Engineering, GPA, etc. Up to 500 characters"
       />
       <FormInput
         isToggle={true}
