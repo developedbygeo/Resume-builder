@@ -58,3 +58,35 @@ export const ImgContainer = styled.div`
   background-image: url(${({ imageSrc }) => imageSrc || placeholder});
   background-size: cover;
 `;
+
+export const PreviewContainer = styled(Container)`
+  min-height: 100vh;
+  width: 100vw;
+  margin: 0;
+  ${({ theme: { mixins } }) =>
+    mixins.gridMixin('0.4fr 1fr', '1fr', 'center', 'space-evenly')};
+
+  & > aside {
+    grid-area: 1;
+  }
+`;
+
+export const StyledAside = styled.aside`
+  width: 100%;
+  height: 100%;
+  margin-top: auto;
+  ${({ theme: { mixins } }) =>
+    mixins.gridMixin('1fr', '0.7fr repeat(3, 1fr)', 'center', 'space-evenly')};
+  background-color: ${({ theme }) => theme.colors.cta.standard};
+
+  & > div {
+    word-wrap: anywhere;
+  }
+  & > .img-container {
+    height: 80%;
+    width: 90%;
+    border-radius: 50%;
+    border: 2px solid red;
+    margin: auto;
+  }
+`;
