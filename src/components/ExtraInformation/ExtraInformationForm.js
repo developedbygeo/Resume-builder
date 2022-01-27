@@ -7,6 +7,7 @@ import StyledForm from '../shared/Form.styled';
 import FormInput from '../shared/FormInput';
 import FormButton from '../shared/FormButton';
 import { errors } from '../shared/validation';
+import submittedFormLayout from '../shared/layout';
 
 const ExtraInformationForm = () => {
   const { addExtraInfo } = useContext(InfoContext);
