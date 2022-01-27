@@ -4,6 +4,8 @@ import { AddMoreDetails } from '../shared/Button.styled';
 import PersonalPhoto from './PersonalPhoto';
 import PersonalForm from './PersonalForm';
 import PersonalAdditionalForm from './PersonalAdditionalForm';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
 
 const Personal = () => {
   const [toggleMoreDetails, setToggleMoreDetails] = useState(false);
@@ -19,7 +21,11 @@ const Personal = () => {
     }
   };
 
-  const toggleIcon = toggleMoreDetails ? '▲' : '▼';
+  const toggleIcon = toggleMoreDetails ? (
+    <FontAwesomeIcon icon={faChevronUp} />
+  ) : (
+    <FontAwesomeIcon icon={faChevronDown} />
+  );
 
   const shouldToggleAppear = !additionalFormSubmitted && (
     <AddMoreDetails onClick={moreDetailsHandler}>
