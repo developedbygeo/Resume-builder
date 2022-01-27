@@ -14,13 +14,12 @@ export const currentDay =
 const nameRegex = /^[a-z\s\.\,]{2,50}$/i;
 const textareaRegex = /^[a-z0-9\W]{50,}$/i;
 const generalRegex = /^[\w\W]{2,}$/i;
-const optionalRegex = /^[\w\W]{0,200}$/i;
+const optionalRegex = /^[\w\W]{0,500}$/i;
 const textAndWhitespaceRegex = /^[a-z0-9\s]{2,}$/i;
 const postalRegex = /^[a-z0-9]{2,}$/i;
 const emailRegex = /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/i;
 const phoneRegex = /^[0-9]{5,}$/;
 const linkedInRegex = /^in\/[\w]+[\S]+$/;
-const extraRegex = /^(?:[\w\,]+(\s)*){0,5}[$\w]$/i;
 
 export const validation = {
   validateGeneric: (string) => nameRegex.test(string),
@@ -37,7 +36,9 @@ export const validation = {
     dateInput === '' || +currentYear + 6 > new Date(dateInput).getFullYear()
       ? true
       : false,
-  validateExtra: (string) => extraRegex.test(string),
+  validateExtra: (string) => {
+    return string.trim().toLowerCase().split(',').length <= 5;
+  },
 };
 
 export const errors = {
@@ -57,5 +58,5 @@ export const errors = {
   timeFrameTip: (field, verb) =>
     `Tip: Select either the end of your ${field} or that you are currently ${verb} here to continue.`,
   errorDescription: 'A description is required. Please provide one.',
-  errorExtra: `Special characters & trailing comma are not allowed. Values should follow the format of 'a, b, c' and may be up to 5.`,
+  errorExtra: `Trailing comma & special characters are not allowed. Values should follow the format of 'a, b, c' and may be up to 5.`,
 };
