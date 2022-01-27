@@ -1,6 +1,7 @@
 import React from 'react';
 import { Container } from './Container.styled';
 import { Label, Input } from './Input.styled';
+import Counter from '../shared/Counter';
 import Toggle from './Toggle/Toggle';
 
 const FormInput = (
@@ -22,6 +23,7 @@ const FormInput = (
     toggleTitle,
     minConstraint,
     maxConstraint,
+    needsCounter = false,
   },
   ref
 ) => {
@@ -42,6 +44,9 @@ const FormInput = (
         min={minConstraint}
         max={maxConstraint}
       />
+      {needsCounter && (
+        <Counter currentLength={inputValue.length} maxLength={needsCounter} />
+      )}
       {className ? <p>{errorMessage}</p> : null}
     </Container>
   );
