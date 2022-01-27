@@ -64,6 +64,7 @@ const StyledForm = styled.form`
     color: #b40e0e;
     letter-spacing: 0.1rem;
     font-weight: 600;
+    margin-top: 1rem;
   }
   .tip {
     color: #1e3657;
