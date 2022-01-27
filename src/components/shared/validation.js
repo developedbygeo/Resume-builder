@@ -20,6 +20,7 @@ const postalRegex = /^[a-z0-9]{2,}$/i;
 const emailRegex = /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/i;
 const phoneRegex = /^[0-9]{5,}$/;
 const linkedInRegex = /^in\/[\w]+[\S]+$/;
+const extraRegex = /^(?:[\w\,]+(\s)*){0,5}[$\w]$/i;
 
 export const validation = {
   validateGeneric: (string) => nameRegex.test(string),
@@ -36,6 +37,7 @@ export const validation = {
     dateInput === '' || +currentYear + 6 > new Date(dateInput).getFullYear()
       ? true
       : false,
+  validateExtra: (string) => extraRegex.test(string),
 };
 
 export const errors = {
@@ -55,4 +57,5 @@ export const errors = {
   timeFrameTip: (field, verb) =>
     `Tip: Select either the end of your ${field} or that you are currently ${verb} here to continue.`,
   errorDescription: 'A description is required. Please provide one.',
+  errorExtra: `Special characters & trailing comma are not allowed. Values should follow the format of 'a, b, c' and may be up to 5.`,
 };
