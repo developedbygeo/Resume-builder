@@ -4,6 +4,12 @@ import _ from 'lodash';
 export const InfoContext = React.createContext({
   information: [],
   addInformation: () => {},
+  addPersonal: () => {},
+  addAdditional: () => {},
+  addContact: () => {},
+  addEmployment: () => {},
+  addEducation: () => {},
+  addExtraInfo: () => {},
 });
 
 const defaultState = {
@@ -39,6 +45,10 @@ const defaultState = {
       to: '',
       description: '',
     },
+    extraInfo: {
+      skills: [],
+      languages: [],
+    },
   },
   status: {
     personal: false,
@@ -55,7 +65,14 @@ const informationReducer = (state = defaultState, action) => {
   const {
     status,
     information,
-    information: { personal, additional, contact, employment, education },
+    information: {
+      personal,
+      additional,
+      contact,
+      employment,
+      education,
+      extraInfo: { skills, languages },
+    },
   } = currentSnapshot;
 
   switch (type) {
@@ -95,6 +112,15 @@ const informationReducer = (state = defaultState, action) => {
       }
       return currentSnapshot;
     }
+    case 'ADD_EXTRA_INFO': {
+      const [sanitizedSkills, sanitizedLanguages] = [
+        _.compact(payload.skills),
+        _.compact(payload.languages),
+      ];
+      _.assign(skills, sanitizedSkills);
+      _.assign(languages, sanitizedLanguages);
+      return currentSnapshot;
+    }
     default: {
       return currentSnapshot;
     }
@@ -122,6 +148,9 @@ const InformationProvider = ({ children }) => {
   const addEducationHandler = (details, identifier) => {
     dispatchFn({ type: 'ADD_EDUCATION', payload: details, identifier });
   };
+  const addExtraInfoHandler = (details) => {
+    dispatchFn({ type: 'ADD_EXTRA_INFO', payload: details });
+  };
 
   const defaultValues = {
     defaultState: currentState,
@@ -130,6 +159,7 @@ const InformationProvider = ({ children }) => {
     addContact: addContactHandler,
     addEmployment: addEmploymentHandler,
     addEducation: addEducationHandler,
+    addExtraInfo: addExtraInfoHandler,
   };
 
   return (
