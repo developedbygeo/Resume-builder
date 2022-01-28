@@ -9,7 +9,7 @@ import FormButton from '../shared/FormButton';
 import { errors } from '../shared/validation';
 import submittedFormLayout from '../shared/layout';
 
-const ExtraInformationForm = () => {
+const ExtraInformationForm = ({ checkSubmission }) => {
   const { addExtraInfo } = useContext(InfoContext);
   const [isSubmitted, formSubmissionHandler, setIsSubmitted] = useForm(
     addExtraInfo,
@@ -47,7 +47,9 @@ const ExtraInformationForm = () => {
 
   return !isSubmitted ? (
     <StyledForm
-      onSubmit={(e) => formSubmissionHandler(e, isFormValid, dispatchData)}
+      onSubmit={(e) =>
+        formSubmissionHandler(e, isFormValid, dispatchData, checkSubmission)
+      }
       autocomplete="off"
     >
       <FormInput
