@@ -75,6 +75,8 @@ const EducationForm = ({ submissionCheck, identifier = null }) => {
 
   const dispatchData = { school, degree, from, to, description };
 
+  const id = identifier ? `#${identifier.replace('edu-', '')}` : '';
+
   return !isSubmitted ? (
     <StyledForm
       onSubmit={(e) =>
@@ -168,7 +170,7 @@ const EducationForm = ({ submissionCheck, identifier = null }) => {
       <FormButton disabled={!isFormValid} />
     </StyledForm>
   ) : (
-    submittedFormLayout('Education details', () => setIsSubmitted(false))
+    submittedFormLayout(`Education ${id}`, () => setIsSubmitted(false))
   );
 };
 

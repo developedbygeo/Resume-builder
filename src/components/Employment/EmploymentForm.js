@@ -84,6 +84,8 @@ const EmploymentForm = ({ submissionCheck, identifier = null }) => {
 
   const dispatchData = { title, employer, description, location, from, to };
 
+  const id = identifier ? `#${identifier.replace('emp-', '')}` : '';
+
   return !isSubmitted ? (
     <StyledForm
       onSubmit={(e) =>
@@ -192,7 +194,7 @@ const EmploymentForm = ({ submissionCheck, identifier = null }) => {
       <FormButton disabled={!isFormValid} />
     </StyledForm>
   ) : (
-    submittedFormLayout('Employment details', () => setIsSubmitted(false))
+    submittedFormLayout(`Employment ${id}`, () => setIsSubmitted(false))
   );
 };
 
