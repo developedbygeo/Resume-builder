@@ -30,6 +30,14 @@ const PersonalForm = () => {
   } = useInput(validation.validateGeneric);
 
   const {
+    value: role,
+    isValueValid: isRolevalid,
+    hasError: roleHasError,
+    inputChangeHandler: roleChangeHandler,
+    inputBlurHandler: roleBlurHandler,
+  } = useInput(validation.validateTextNumbers);
+
+  const {
     value: personalStatement,
     isValueValid: isStatementValid,
     hasError: statementHameHasError,
@@ -37,9 +45,10 @@ const PersonalForm = () => {
     inputBlurHandler: statementBlurHandler,
   } = useInput(validation.validateText);
 
-  const isFormValid = isFNameValid && isLastNameValid && isStatementValid;
+  const isFormValid =
+    isFNameValid && isLastNameValid && isRolevalid && isStatementValid;
 
-  const dispatchData = { firstName, lastName, personalStatement };
+  const dispatchData = { firstName, lastName, role, personalStatement };
 
   return !isSubmitted ? (
     <StyledForm
@@ -71,6 +80,19 @@ const PersonalForm = () => {
         inputBlur={lastNameBlurHandler}
         inputValue={lastName}
         inputPlaceholder="Your full last name"
+        inputType="text"
+        required
+      />
+      <FormInput
+        className={roleHasError && 'invalid'}
+        errorMessage={errors.errorGeneric('target/current role')}
+        htmlFor="role"
+        inputId="role"
+        label="Current Role"
+        inputChange={roleChangeHandler}
+        inputBlur={roleBlurHandler}
+        inputValue={role}
+        inputPlaceholder="Your current or target role"
         inputType="text"
         required
       />
