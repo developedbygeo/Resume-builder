@@ -18,6 +18,7 @@ const defaultState = {
     personal: {
       firstName: '',
       lastName: '',
+      role: '',
       personalStatement: '',
     },
     additional: {
@@ -56,6 +57,7 @@ const defaultState = {
     contact: false,
     education: false,
     employment: false,
+    languagesSkills: false,
   },
 };
 
@@ -119,6 +121,7 @@ const informationReducer = (state = defaultState, action) => {
       ];
       _.assign(skills, sanitizedSkills);
       _.assign(languages, sanitizedLanguages);
+      status.languagesSkills = true;
       return currentSnapshot;
     }
     default: {
