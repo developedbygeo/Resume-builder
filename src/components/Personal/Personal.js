@@ -36,7 +36,7 @@ const Personal = () => {
   return (
     <StyledSection marginTop="3rem">
       <h1>Personal Details</h1>
-      <Container direction="row">
+      <Container direction="row" marginTop={'2rem'}>
         <PersonalForm />
         <PersonalPhoto />
       </Container>
