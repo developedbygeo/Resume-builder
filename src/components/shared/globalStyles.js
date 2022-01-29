@@ -15,7 +15,7 @@ const GlobalStyle = createGlobalStyle`
 html {
   font-size: 62.5%;
   @media ${devices.phoneStandard}{
-    font-size: 40%;
+    font-size: 41%;
   }
 }
 
@@ -50,16 +50,20 @@ h3 {
 }
 
 h1, h2, h3{
-font-family: 'Montserrat', sans-serif;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: 600;
+  color: ${({ theme }) => theme.colors.headerTitles}
 }
 p,
 button,
 select,
 input,
+textarea,
 label,
 div,
 li {
   font-size: 1.8rem;
+  font-family: 'Open Sans', sans-serif;
 }
 li {
   list-style: none;
