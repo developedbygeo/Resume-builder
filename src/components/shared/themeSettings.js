@@ -1,9 +1,10 @@
 const themeSettings = {
   colors: {
-    header: '#f9f6f6',
+    header: '#31b1d8',
     main: '#fdfcfe ',
     footer: '#475569',
     gray: '#e2e9f4',
+    headerTitles: '#0A2A33',
     errorBorder: '1px solid #b40e0e',
     errorBg: '#fddddd',
     cta: { standard: '#31b1d8', hover: '#218bab' },
