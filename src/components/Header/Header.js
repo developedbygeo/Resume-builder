@@ -1,16 +1,20 @@
+import { DownloadButton, TrashButton } from './NavButtons';
 import { Nav, StyledHeader } from './Header.styled';
 import { Logo } from './Logo.styled';
-import { CtaButton, SecondaryButton } from '../shared/Button.styled';
+import { LogoContainer } from '../shared/Container.styled';
+import logoImg from '../../assets/logo.svg';
 
 const Header = () => {
   return (
     <StyledHeader>
       <div>
-        <Logo src="/logo-cv.png" />
+        <LogoContainer>
+          <Logo src={logoImg} alt="cv-builder-logo" draggable="false" />
+        </LogoContainer>
         <Nav>
           <div>
-            <SecondaryButton title="Clear all entries!">Clear</SecondaryButton>
-            <CtaButton title="Download your resume now!">Download</CtaButton>
+            <TrashButton />
+            <DownloadButton />
           </div>
         </Nav>
       </div>
