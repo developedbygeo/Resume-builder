@@ -1,7 +1,11 @@
-import { useState } from 'react';
+import { useState, useContext, useEffect } from 'react';
+import { InfoContext } from '../store/infoContext';
 
 const useForm = (dispatchFn, includesDate = false) => {
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const {
+    defaultState: { flag },
+  } = useContext(InfoContext);
 
   const formSubmissionHandler = (
     e,
@@ -34,6 +38,12 @@ const useForm = (dispatchFn, includesDate = false) => {
       transmitParent(identifier);
     }
   };
+
+  useEffect(() => {
+    if (flag.resetFlag === true) {
+      setIsSubmitted(false);
+    }
+  }, [flag.resetFlag]);
 
   return [isSubmitted, formSubmissionHandler, setIsSubmitted];
 };
