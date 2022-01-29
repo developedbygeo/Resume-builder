@@ -8,8 +8,14 @@ export const Container = styled.div`
   display: flex;
   flex-direction: ${({ direction }) => direction || 'column'};
   justify-content: center;
-  margin-top: 1rem;
+  margin-top: ${({ marginTop }) => marginTop || '1rem'};
   align-items: ${({ alignItems }) => alignItems || 'center'};
+`;
+
+export const LogoContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  max-height: 10vh;
 `;
 
 export const LayoutContainer = styled(Container)`
@@ -31,6 +37,9 @@ export const StyledSection = styled.section`
     grid-row: 999;
     justify-self: flex-start;
   }
+  & > div {
+    width: 100%;
+  }
 
   .editContainer {
     justify-content: space-between;
@@ -41,8 +50,8 @@ export const StyledSection = styled.section`
 
   .photoCont {
     position: absolute;
-    top: 11%;
-    right: 4%;
+    top: 13%;
+    right: 7%;
     input {
       height: 7rem;
       width: 7rem;
@@ -81,6 +90,11 @@ export const StyledAside = styled.aside`
 
   & > div {
     word-wrap: anywhere;
+    h4 {
+      width: 90%;
+      margin-right: auto;
+      height: 2rem;
+    }
   }
   & > .img-container {
     height: 80%;
