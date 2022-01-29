@@ -12,12 +12,12 @@ export const Nav = styled.nav`
   & > div {
     ${defaultSettings}
     ${({ theme: { mixins } }) => mixins.gridMixin('repeat(2, 1fr)', '1fr')};
-    gap: 1rem;
+    gap: 2rem;
     align-items: flex-end;
     justify-items: center;
   }
   & button {
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
   }
 `;
 
@@ -28,8 +28,9 @@ export const StyledHeader = styled.header`
 
   & > div {
     width: 95%;
-    height: 90%;
+    height: 100%;
     margin: auto;
     ${({ theme: { mixins } }) => mixins.gridMixin('1fr 0.2fr', '1fr')}
+    gap: 3rem;
   }
 `;
