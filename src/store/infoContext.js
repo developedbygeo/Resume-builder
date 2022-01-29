@@ -10,6 +10,7 @@ export const InfoContext = React.createContext({
   addEmployment: () => {},
   addEducation: () => {},
   addExtraInfo: () => {},
+  reset: () => {},
 });
 
 const defaultState = {
@@ -59,6 +60,9 @@ const defaultState = {
     employment: false,
     languagesSkills: false,
   },
+  flag: {
+    resetFlag: false,
+  },
 };
 
 const informationReducer = (state = defaultState, action) => {
@@ -67,6 +71,7 @@ const informationReducer = (state = defaultState, action) => {
   const {
     status,
     information,
+    flag,
     information: {
       personal,
       additional,
@@ -81,11 +86,13 @@ const informationReducer = (state = defaultState, action) => {
     case 'ADD_PERSONAL': {
       _.assign(personal, payload);
       status.personal = true;
+      flag.resetFlag = false;
       return currentSnapshot;
     }
     case 'ADD_ADDITIONAL': {
       _.assign(additional, payload);
       status.additional = true;
+      flag.resetFlag = false;
       return currentSnapshot;
     }
     case 'ADD_CONTACT': {
@@ -102,6 +109,7 @@ const informationReducer = (state = defaultState, action) => {
         information[`employment_${identifier}`] = payload;
         information[`employment_${identifier}`].key = identifier;
       }
+      flag.resetFlag = false;
       return currentSnapshot;
     }
     case 'ADD_EDUCATION': {
@@ -112,6 +120,7 @@ const informationReducer = (state = defaultState, action) => {
         information[`education_${identifier}`] = payload;
         information[`education_${identifier}`].key = identifier;
       }
+      flag.resetFlag = false;
       return currentSnapshot;
     }
     case 'ADD_EXTRA_INFO': {
@@ -122,7 +131,12 @@ const informationReducer = (state = defaultState, action) => {
       _.assign(skills, sanitizedSkills);
       _.assign(languages, sanitizedLanguages);
       status.languagesSkills = true;
+      flag.resetFlag = false;
       return currentSnapshot;
+    }
+    case 'RESET': {
+      flag.resetFlag = true;
+      return { ...defaultState, flag };
     }
     default: {
       return currentSnapshot;
@@ -154,6 +168,9 @@ const InformationProvider = ({ children }) => {
   const addExtraInfoHandler = (details) => {
     dispatchFn({ type: 'ADD_EXTRA_INFO', payload: details });
   };
+  const resetHandler = () => {
+    dispatchFn({ type: 'RESET' });
+  };
 
   const defaultValues = {
     defaultState: currentState,
@@ -163,6 +180,7 @@ const InformationProvider = ({ children }) => {
     addEmployment: addEmploymentHandler,
     addEducation: addEducationHandler,
     addExtraInfo: addExtraInfoHandler,
+    reset: resetHandler,
   };
 
   return (
