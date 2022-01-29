@@ -1,5 +1,7 @@
 import { Container } from './Container.styled';
 import { CtaButton } from './Button.styled';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 
 const submittedFormLayout = (field, setStateFn) => {
   return (
@@ -9,7 +11,7 @@ const submittedFormLayout = (field, setStateFn) => {
         title={`Edit your ${field.toLowerCase()}`}
         onClick={setStateFn}
       >
-        Edit
+        <FontAwesomeIcon icon={faPencilAlt} />
       </CtaButton>
     </Container>
   );
