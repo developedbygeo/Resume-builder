@@ -51,7 +51,7 @@ export const StyledSection = styled.section`
   .photoCont {
     position: absolute;
     top: 13%;
-    right: 7%;
+    right: 5%;
     input {
       height: 7rem;
       width: 7rem;

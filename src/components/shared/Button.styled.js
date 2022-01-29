@@ -20,6 +20,33 @@ export const Button = styled.button`
   }
 `;
 
+export const NavButton = styled(Button)`
+  height: 4rem;
+  width: 3rem;
+  font-size: 2.4rem;
+  background: transparent;
+  color: #ebebeb;
+  border: none;
+  transition: all 100ms ease-in-out;
+  border-radius: 0;
+  padding: 0;
+
+  &:not(:disabled):hover {
+    transform: scale(1.05);
+    color: #ffffff;
+    border: none;
+    border-bottom: 1px solid #ffffff;
+  }
+
+  &:not(:disabled):hover:active {
+    transform: scale(1.05) translateY(0.125rem);
+  }
+
+  &:not(:disabled):active {
+    transform: translateY(0.125rem);
+  }
+`;
+
 export const CtaButton = styled(Button)`
   background: ${({ theme }) => theme.colors.cta.standard};
 
