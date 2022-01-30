@@ -1,7 +1,7 @@
 const themeSettings = {
   colors: {
     header: '#31b1d8',
-    main: '#fdfcfe ',
+    main: '#fff ',
     footer: '#475569',
     gray: '#e2e9f4',
     headerTitles: '#0A2A33',
@@ -21,7 +21,7 @@ const themeSettings = {
       return `
       display: flex;
       justify-content: ${justify};
-      align-items: ${align}
+      align-items: ${align};
       flex-direction: ${dir}`;
     },
     maxContainer: () => {
