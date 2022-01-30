@@ -8,6 +8,7 @@ import Contact from './components/Contact/Contact';
 import Employment from './components/Employment/Employment';
 import Education from './components/Education/Education';
 import InformationProvider from './store/infoContext';
+import ExtraInformation from './components/ExtraInformation/ExtraInformation';
 
 const App = () => {
   return (
@@ -22,6 +23,7 @@ const App = () => {
               <Contact />
               <Employment />
               <Education />
+              <ExtraInformation />
             </LayoutContainer>
           </main>
         </>
