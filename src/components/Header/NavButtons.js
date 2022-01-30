@@ -8,7 +8,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { NavButton } from '../shared/Button.styled';
 
-export const DownloadButton = () => {
+export const DownloadButton = ({ onPreviewToggle }) => {
   const {
     defaultState: { status },
   } = useContext(InfoContext);
@@ -17,17 +17,15 @@ export const DownloadButton = () => {
   const title = isDownloadReady ? 'Download your CV' : 'Preview your CV';
 
   return (
-    <NavButton title={title}>
+    <NavButton onClick={onPreviewToggle} title={title}>
       <FontAwesomeIcon icon={icon} />
     </NavButton>
   );
 };
 
-export const TrashButton = () => {
-  const { reset } = useContext(InfoContext);
-
+export const TrashButton = ({ onModalToggle }) => {
   return (
-    <NavButton onClick={reset} title="Clear all fields">
+    <NavButton onClick={onModalToggle} title="Clear all fields">
       <FontAwesomeIcon icon={faTrashAlt} />
     </NavButton>
   );
