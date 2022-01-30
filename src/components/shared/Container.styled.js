@@ -69,8 +69,8 @@ export const ImgContainer = styled.div`
 `;
 
 export const PreviewContainer = styled(Container)`
-  min-height: 100vh;
-  width: 100vw;
+  height: 100%;
+  width: 100%;
   margin: 0;
   ${({ theme: { mixins } }) =>
     mixins.gridMixin('0.4fr 1fr', '1fr', 'center', 'space-evenly')};
@@ -87,9 +87,12 @@ export const StyledAside = styled.aside`
   ${({ theme: { mixins } }) =>
     mixins.gridMixin('1fr', '0.7fr repeat(3, 1fr)', 'center', 'space-evenly')};
   background-color: ${({ theme }) => theme.colors.cta.standard};
+  border-radius: 1rem;
 
   & > div {
     word-wrap: anywhere;
+    justify-content: space-between;
+
     h4 {
       width: 90%;
       margin-right: auto;
@@ -102,5 +105,13 @@ export const StyledAside = styled.aside`
     border-radius: 50%;
     border: 2px solid red;
     margin: auto;
+  }
+  .headerWrapper {
+    width: 100%;
+    height: 3rem;
+    background: ${({ theme }) => theme.colors.main};
+    color: ${({ theme }) => theme.colors.headerTitles};
+    border-radius: 1rem;
+    padding: 0.25rem;
   }
 `;
