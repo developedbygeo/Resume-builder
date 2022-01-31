@@ -41,7 +41,7 @@ const modalStyle = css`
   width: 90%;
   z-index: 30;
   background-color: white;
-  padding: 1rem;
+  padding: ${({ modPadding }) => modPadding || '0'};
   border-radius: 1rem;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
   animation: ${modalSlide} 400ms ease-in-out;
