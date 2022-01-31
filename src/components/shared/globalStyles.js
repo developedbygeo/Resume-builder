@@ -65,9 +65,6 @@ li {
   font-size: 1.8rem;
   font-family: 'Open Sans', sans-serif;
 }
-li {
-  list-style: none;
-}
 a {
   text-decoration: none;
   color: inherit;
