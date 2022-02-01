@@ -34,6 +34,10 @@ main {
       colors: { main },
     },
   }) => main || '#ffffff'};
+&>.progressWrap{
+  background: ${({ theme: { colors } }) => colors.header};
+  height: 2rem;
+}
 }
 h1 {
   font-size: 2.8rem;
