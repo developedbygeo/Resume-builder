@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { InfoContext } from '../../store/infoContext';
-import { ProgressBar } from './Container.styled';
+import { ProgressBar, ProgressFigcaption } from './Container.styled';
 
 const Progress = () => {
   const {
@@ -12,13 +12,16 @@ const Progress = () => {
   );
 
   const percentageEval = statusPercentage > 0;
+  const preferableFontSize = statusPercentage < 20 ? '1.2rem' : null;
 
   return (
-    <div style={{ background: '#31b1d8' }}>
+    <div className="progressWrap">
       <ProgressBar barWidth={statusPercentage}>
         <div></div>
         {percentageEval && (
-          <figcaption>{statusPercentage}% completed</figcaption>
+          <ProgressFigcaption fontSize={preferableFontSize}>
+            {statusPercentage}% completed
+          </ProgressFigcaption>
         )}
       </ProgressBar>
     </div>
