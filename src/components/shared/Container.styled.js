@@ -40,7 +40,7 @@ export const LayoutContainer = styled(Container)`
   margin-top: 0;
   gap: 3rem;
   ${({ theme: { mixins } }) =>
-    mixins.gridMixin('1fr', 'repeat(4, 1fr)', 'center', 'flex-start')}
+    mixins.gridMixin('1fr', '0.1fr repeat(4, 1fr)', 'center', 'flex-start')}
 `;
 
 export const StyledSection = styled.section`
@@ -75,6 +75,33 @@ export const StyledSection = styled.section`
       width: 7rem;
     }
   }
+`;
+
+export const ProgressBar = styled.figure`
+  ${({ theme: { mixins } }) => mixins.flexMixin('center', 'center', 'column')};
+  height: 100%;
+  max-height: 2rem;
+  border: none;
+  width: ${({ barWidth }) => `${barWidth}%`};
+  background: ${({ theme }) => theme.colors.header};
+  border-radius: 1rem 1rem 0 0;
+  & > div {
+    position: relative;
+    ${({ theme: { mixins } }) => mixins.maxContainer()}
+    background: ${({ theme }) => theme.colors.progressBar};
+    min-height: 1.5rem;
+  }
+`;
+export const ProgressFigcaption = styled.figcaption`
+  position: absolute;
+  color: ${({ theme }) => theme.colors.main};
+  text-align: center;
+  font-size: ${({ fontSize }) => fontSize || '1.5rem'};
+  height: fit-content;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: 400;
+  width: inherit;
+  max-width: 100%;
 `;
 
 export const ImgContainer = styled.div`
