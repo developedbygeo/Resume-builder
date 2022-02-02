@@ -7,15 +7,19 @@ const Backdrop = ({ onDisable }) => {
   return <DynamicDiv onClick={onDisable} backdrop="true" />;
 };
 
-const ModalOverlay = ({ children, deleteMenu, previewMenu }) => {
+const ModalOverlay = ({ children, deleteMenu, previewMenu, dialogue }) => {
   return (
-    <DynamicDiv deleteMenu={deleteMenu} previewMenu={previewMenu}>
+    <DynamicDiv
+      dialogue={dialogue}
+      deleteMenu={deleteMenu}
+      previewMenu={previewMenu}
+    >
       {children}
     </DynamicDiv>
   );
 };
 
-const Modal = ({ onDisable, children, deleteMenu, previewMenu }) => {
+const Modal = ({ onDisable, children, deleteMenu, previewMenu, dialogue }) => {
   return (
     <>
       {reactDom.createPortal(
@@ -23,7 +27,11 @@ const Modal = ({ onDisable, children, deleteMenu, previewMenu }) => {
         modalContainer
       )}
       {reactDom.createPortal(
-        <ModalOverlay deleteMenu={deleteMenu} previewMenu={previewMenu}>
+        <ModalOverlay
+          dialogue={dialogue}
+          deleteMenu={deleteMenu}
+          previewMenu={previewMenu}
+        >
           {children}
         </ModalOverlay>,
         modalContainer
