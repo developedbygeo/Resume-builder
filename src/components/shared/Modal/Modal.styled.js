@@ -37,14 +37,20 @@ const backdropStyle = css`
 const modalStyle = css`
   position: fixed;
   top: 20vh;
-  left: 5%;
-  width: 90%;
   z-index: 30;
   background-color: white;
   padding: ${({ modPadding }) => modPadding || '0'};
-  border-radius: 1rem;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
   animation: ${modalSlide} 400ms ease-in-out;
+`;
+
+const modalDialogue = css`
+  left: 5%;
+  width: 90%;
+  border-radius: 1rem;
+`;
+const modalPreview = css`
+  width: 100%;
 `;
 
 const deleteStyle = css`
@@ -67,6 +73,8 @@ const getDivStyle = (props) => {
   }
 };
 
+const getModalSize = (props) => (props.dialogue ? modalDialogue : modalPreview);
+
 const getModalLayout = (props) => {
   if (props.deleteMenu) {
     return deleteStyle;
@@ -81,14 +89,24 @@ const getModalLayout = (props) => {
 const DynamicDiv = styled.div`
   ${getDivStyle}
   ${getModalLayout}
+  ${getModalSize}
 
   &>.actions {
     ${({ theme: { mixins } }) =>
       mixins.gridMixin('repeat(2, 1fr)', '1fr', 'center', 'center')};
     gap: 1rem;
+    & > button {
+      border-radius: 0.5rem 0.5rem 0 0;
+      &:hover {
+        transform: scale(1);
+      }
+    }
   }
   & > h2 {
     text-align: center;
+  }
+  & > .warningHeader {
+    padding: 1.2rem;
   }
   & > .svgCont {
     ${max}
