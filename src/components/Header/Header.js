@@ -20,7 +20,7 @@ const Header = () => {
   };
 
   const deleteModalView = modalState && (
-    <Modal onDisable={modalToggleHandler} deleteMenu="true">
+    <Modal dialogue="true" onDisable={modalToggleHandler} deleteMenu="true">
       <ClearFormsDialogue onDisable={modalToggleHandler} />
     </Modal>
   );
