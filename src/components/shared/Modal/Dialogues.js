@@ -16,7 +16,9 @@ export const ClearFormsDialogue = ({ onDisable }) => {
 
   return (
     <>
-      <h2>Are you sure you want to clear all data?</h2>
+      <h2 className="warningHeader">
+        Are you sure you want to clear all data?
+      </h2>
       <div className="svgCont">
         <DeleteImage />
       </div>
