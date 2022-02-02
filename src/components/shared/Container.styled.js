@@ -68,7 +68,7 @@ export const StyledSection = styled.section`
 
   & .photoCont {
     position: absolute;
-    top: 13%;
+    top: 14%;
     right: 5%;
     input {
       height: 7rem;
@@ -127,7 +127,7 @@ export const PreviewContainer = styled(Container)`
 
 const asideText = css`
   width: 100%;
-  font-size: 1.6rem;
+  font-size: 1.35rem;
   color: ${({ theme }) => theme.colors.main};
   overflow-wrap: anywhere;
 `;
@@ -169,7 +169,7 @@ export const StyledAside = styled.aside`
   }
   .wrapCont {
     place-items: center;
-    gap: 0.5rem;
+    gap: 1rem;
     svg {
       font-size: 1.6rem;
       color: ${({ theme }) => theme.colors.headerTitles};
