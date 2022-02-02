@@ -7,7 +7,7 @@ import {
   Container,
 } from '../shared/Container.styled';
 import PreviewContact from './PreviewContact';
-import PreviewSkills from './PreviewSkills';
+import PreviewList from './PreviewList';
 
 const Preview = () => {
   const {
@@ -36,12 +36,8 @@ const Preview = () => {
           linkedin={contact.linkedin}
           additionalDetails={additional}
         />
-        <PreviewSkills skills={skills} />
-        <Container>
-          <div className="headerWrapper">
-            <h4>Languages</h4>
-          </div>
-        </Container>
+        <PreviewList title="Skills" items={skills} />
+        <PreviewList title="Languages" items={languages} />
       </StyledAside>
     </PreviewContainer>
   );
