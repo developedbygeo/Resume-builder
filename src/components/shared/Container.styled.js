@@ -123,6 +123,15 @@ export const PreviewContainer = styled(Container)`
   & > aside {
     grid-area: 1;
   }
+  & > section {
+    ${({ theme: { mixins } }) =>
+      mixins.gridMixin('1fr', '0.45fr auto', 'center', 'space-evenly')};
+    ${({ theme: { mixins } }) => mixins.maxContainer()}
+
+    .desc {
+      overflow-wrap: anywhere;
+    }
+  }
 `;
 
 const asideText = css`
