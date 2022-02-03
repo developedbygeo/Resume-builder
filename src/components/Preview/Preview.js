@@ -8,6 +8,8 @@ import {
 } from '../shared/Container.styled';
 import PreviewContact from './PreviewContact';
 import PreviewList from './PreviewList';
+import PreviewMain from './PreviewMain';
+import PreviewExperience from './PreviewExperience';
 
 const Preview = () => {
   const {
@@ -39,6 +41,17 @@ const Preview = () => {
         <PreviewList title="Skills" items={skills} />
         <PreviewList title="Languages" items={languages} />
       </StyledAside>
+      <section>
+        <PreviewMain personal={personal} />
+        <Container grid={true} className="wrapCont">
+          <h3>Work Experience</h3>
+          <PreviewExperience employment={employment} />
+        </Container>
+        <Container grid={true} className="wrapCont">
+          <h3>Education</h3>
+          <PreviewExperience education={education} />
+        </Container>
+      </section>
     </PreviewContainer>
   );
 };
