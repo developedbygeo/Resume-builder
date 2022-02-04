@@ -13,6 +13,25 @@ const customGridLayout = css`
   display: grid;
   grid-template-rows: ${({ gridRows }) => gridRows || 'auto'};
   grid-template-columns: ${({ gridColumns }) => gridColumns || '1fr'};
+  gap: ${({ gridGap }) => gridGap || 'initial'};
+`;
+
+const previewHeaderStyling = css`
+  background: ${({ theme }) => theme.colors.previewSecondaryBg};
+  color: ${({ theme }) => theme.colors.main};
+  border-radius: 0.75rem;
+  padding: 0.25rem 0.4rem;
+  max-height: 3.5rem;
+`;
+
+const previewInnerContGrid = css`
+  grid-template-rows: repeat(2, 0.2fr) 1fr;
+  gap: 1rem;
+`;
+
+const paragraphStyle = css`
+  font-size: 1.5rem;
+  padding: 0.25rem;
 `;
 
 const getLayout = (props) => {
@@ -28,6 +47,73 @@ export const Container = styled.div`
   height: 95%;
   margin: auto;
   ${getLayout}
+
+  /* styling the personal info preview section */
+  .personalMain {
+    ${previewInnerContGrid}
+    h1,
+    h2 {
+      text-align: center;
+    }
+    & > .description {
+      grid-template-rows: 0.25fr 1fr;
+      gap: 0.5rem;
+      ${({ theme }) => theme.mixins.maxContainer()};
+      & > p {
+        ${paragraphStyle}
+      }
+    }
+  }
+  /* the preview headers - objective, work experience, education */
+  & > .previewHeader {
+    ${previewHeaderStyling}
+  }
+  /* the wrapper & content of work experience / education divs */
+  .infoContainer {
+    grid-template-rows: 0.2fr auto;
+    & > div {
+      ${previewInnerContGrid}
+      margin-top: 0.2rem;
+      gap: 0.5rem;
+      ${({ theme }) => theme.mixins.maxContainer()};
+      h3 {
+        align-self: center;
+        padding: 0.25rem;
+        font-size: 2rem;
+      }
+    }
+    p {
+      ${paragraphStyle}
+    }
+    span {
+      font-weight: 600;
+    }
+    .dates {
+      font-weight: 300;
+    }
+  }
+`;
+
+export const PreviewContainer = styled(Container)`
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  ${({ theme: { mixins } }) =>
+    mixins.gridMixin('0.58fr 1fr', '1fr', 'center', 'space-evenly')};
+
+  & > aside {
+    grid-area: 1;
+  }
+  & > section {
+    ${({ theme: { mixins } }) =>
+      mixins.gridMixin('1fr', '0.45fr auto', 'center', 'space-evenly')};
+    ${({ theme: { mixins } }) => mixins.maxContainer()}
+    gap: 0.5rem;
+
+    .desc {
+      overflow-wrap: anywhere;
+    }
+  }
 `;
 
 export const LogoContainer = styled.div`
@@ -113,27 +199,6 @@ export const ImgContainer = styled.div`
   background-size: cover;
 `;
 
-export const PreviewContainer = styled(Container)`
-  height: 100%;
-  width: 100%;
-  margin: 0;
-  ${({ theme: { mixins } }) =>
-    mixins.gridMixin('0.58fr 1fr', '1fr', 'center', 'space-evenly')};
-
-  & > aside {
-    grid-area: 1;
-  }
-  & > section {
-    ${({ theme: { mixins } }) =>
-      mixins.gridMixin('1fr', '0.45fr auto', 'center', 'space-evenly')};
-    ${({ theme: { mixins } }) => mixins.maxContainer()}
-
-    .desc {
-      overflow-wrap: anywhere;
-    }
-  }
-`;
-
 const asideText = css`
   width: 100%;
   font-size: 1.35rem;
@@ -165,7 +230,7 @@ export const StyledAside = styled.aside`
     height: 90%;
     width: 80%;
     border-radius: 50%;
-    border: 2px solid red;
+    border: 2px solid ${({ theme }) => theme.colors.previewSecondaryBg};
     margin: auto;
   }
   .headerWrapper {
