@@ -1,3 +1,4 @@
+import { Container } from '../shared/Container.styled';
 const dateOptions = { month: 'short', year: 'numeric' };
 
 const formattedDate = (date) => {
@@ -23,19 +24,27 @@ const PreviewExperience = ({ employment, education }) => {
   const datesExist = startDate && endDate;
 
   const experienceLayout = employment ? (
-    <>
+    <Container grid={true}>
       <h3>{employment.title}</h3>
       {datesExist && (
-        <p>{`${employment.employer} | ${startDate} - ${endDate}`}</p>
+        <p className="dates">
+          <span className="employerOrSchool">{employment.employer}</span>
+          {`| ${startDate} - ${endDate}`}
+        </p>
       )}
       <p className="desc">{employment.description}</p>
-    </>
+    </Container>
   ) : (
-    <>
+    <Container grid={true}>
       <h3>{education.degree}</h3>
-      {datesExist && <p>{`${education.school} | ${startDate}-${endDate}`}</p>}
-      {descriptionExists && <p className="desc">{employment.description}</p>}
-    </>
+      {datesExist && (
+        <p className="dates">
+          <span className="employerOrSchool">{education.school}</span>
+          {`| ${startDate} - ${endDate}`}
+        </p>
+      )}
+      {descriptionExists && <p className="desc">{education.description}</p>}
+    </Container>
   );
 
   return experienceLayout;
