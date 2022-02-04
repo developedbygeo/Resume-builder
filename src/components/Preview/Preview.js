@@ -43,12 +43,12 @@ const Preview = () => {
       </StyledAside>
       <section>
         <PreviewMain personal={personal} />
-        <Container grid={true} className="wrapCont">
-          <h3>Work Experience</h3>
+        <Container grid={true} className="infoContainer">
+          <h3 className="previewHeader">Work Experience</h3>
           <PreviewExperience employment={employment} />
         </Container>
-        <Container grid={true} className="wrapCont">
-          <h3>Education</h3>
+        <Container grid={true} className="infoContainer">
+          <h3 className="previewHeader">Education</h3>
           <PreviewExperience education={education} />
         </Container>
       </section>
