@@ -8,6 +8,7 @@ const themeSettings = {
     progressBar: '#218BAB',
     errorBorder: '1px solid #b40e0e',
     errorBg: '#fddddd',
+    previewSecondaryBg: '#083f5d',
     cta: { standard: '#31b1d8', hover: '#218bab' },
     secondary: { standard: '#475569', hover: '#323b49' },
   },
