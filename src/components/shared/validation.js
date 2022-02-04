@@ -41,6 +41,8 @@ export const validation = {
   },
 };
 
+export const shouldFieldRender = (field) => field.trim().length > 0;
+
 export const errors = {
   errorGeneric: (field) => `Please provide a valid ${field}.`,
   errorTextarea: (field) =>
