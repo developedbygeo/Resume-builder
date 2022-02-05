@@ -29,7 +29,7 @@ const PreviewExperience = ({ employment, education }) => {
       {datesExist && (
         <p className="dates">
           <span className="employerOrSchool">{employment.employer}</span>
-          {`| ${startDate} - ${endDate}`}
+          {`${startDate} - ${endDate}`}
         </p>
       )}
       <p className="desc">{employment.description}</p>
@@ -40,7 +40,7 @@ const PreviewExperience = ({ employment, education }) => {
       {datesExist && (
         <p className="dates">
           <span className="employerOrSchool">{education.school}</span>
-          {`| ${startDate} - ${endDate}`}
+          {`${startDate} - ${endDate}`}
         </p>
       )}
       {descriptionExists && <p className="desc">{education.description}</p>}
