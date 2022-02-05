@@ -60,8 +60,10 @@ const deleteStyle = css`
 `;
 
 const previewStyle = css`
-  height: 80vh;
-  top: 10vh;
+  min-height: 80vh;
+  height: auto;
+  max-height: 95vh;
+  top: 0vh;
   margin: auto;
 `;
 
