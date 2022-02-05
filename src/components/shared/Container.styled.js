@@ -25,7 +25,7 @@ const previewHeaderStyling = css`
 `;
 
 const previewInnerContGrid = css`
-  grid-template-rows: repeat(2, 0.2fr) 1fr;
+  grid-template-rows: repeat(2, 0.2fr) auto;
   gap: 1rem;
 `;
 
@@ -71,9 +71,10 @@ export const Container = styled.div`
   /* the wrapper & content of work experience / education divs */
   .infoContainer {
     grid-template-rows: 0.2fr auto;
+    height: 100%;
+    width: 98%;
     & > div {
       ${previewInnerContGrid}
-      margin-top: 0.2rem;
       gap: 0.5rem;
       ${({ theme }) => theme.mixins.maxContainer()};
       h3 {
@@ -83,13 +84,16 @@ export const Container = styled.div`
       }
     }
     p {
-      ${paragraphStyle}
+      ${paragraphStyle};
+      text-transform: capitalize;
     }
     span {
       font-weight: 600;
     }
     .dates {
       font-weight: 300;
+      ${({ theme }) =>
+        theme.mixins.flexMixin('space-between', 'center', 'row')};
     }
   }
 `;
@@ -108,7 +112,7 @@ export const PreviewContainer = styled(Container)`
     ${({ theme: { mixins } }) =>
       mixins.gridMixin('1fr', '0.45fr auto', 'center', 'space-evenly')};
     ${({ theme: { mixins } }) => mixins.maxContainer()}
-    gap: 0.5rem;
+    gap: 0.75rem;
 
     .desc {
       overflow-wrap: anywhere;
@@ -209,7 +213,6 @@ const asideText = css`
 export const StyledAside = styled.aside`
   width: 100%;
   height: 100%;
-  max-height: 80vh;
   margin-top: auto;
   ${({ theme: { mixins } }) =>
     mixins.gridMixin('1fr', '0.7fr repeat(3, 1fr)', 'center', 'space-evenly')};
