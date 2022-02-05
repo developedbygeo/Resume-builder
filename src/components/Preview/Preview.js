@@ -1,3 +1,4 @@
+import useMultipleSlices from '../../hooks/useMultipleSlices';
 import { useContext } from 'react';
 import { InfoContext } from '../../store/infoContext';
 import {
@@ -12,18 +13,26 @@ import PreviewMain from './PreviewMain';
 import PreviewExperience from './PreviewExperience';
 
 const Preview = () => {
+  const allEmployment = useMultipleSlices('employ');
+  const allEducation = useMultipleSlices('edu');
   const {
     defaultState: {
       information: {
         personal,
         additional,
         contact,
-        employment,
-        education,
         extraInfo: { skills, languages },
       },
     },
   } = useContext(InfoContext);
+
+  const renderedEmployment = allEmployment.map((info) => (
+    <PreviewExperience employment={info} />
+  ));
+
+  const renderedEducation = allEducation.map((info) => (
+    <PreviewExperience education={info} />
+  ));
 
   return (
     <PreviewContainer>
@@ -45,11 +54,13 @@ const Preview = () => {
         <PreviewMain personal={personal} />
         <Container grid={true} className="infoContainer">
           <h3 className="previewHeader">Work Experience</h3>
-          <PreviewExperience employment={employment} />
+          {renderedEmployment}
+          {/* <PreviewExperience employment={employment} /> */}
         </Container>
         <Container grid={true} className="infoContainer">
           <h3 className="previewHeader">Education</h3>
-          <PreviewExperience education={education} />
+          {renderedEducation}
+          {/* <PreviewExperience education={education} /> */}
         </Container>
       </section>
     </PreviewContainer>
