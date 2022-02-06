@@ -1,4 +1,15 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+
+const prevButtonStyling = css`
+  border-radius: 0.5rem;
+  padding: 1.3rem 5rem;
+`;
+
+const getPrevBtnStyling = (props) => {
+  if (props.prevBtn) {
+    return prevButtonStyling;
+  }
+};
 
 export const Button = styled.button`
   cursor: pointer;
@@ -49,6 +60,7 @@ export const NavButton = styled(Button)`
 
 export const CtaButton = styled(Button)`
   background: ${({ theme }) => theme.colors.cta.standard};
+  ${getPrevBtnStyling}
 
   &:hover {
     background: ${({ theme }) => theme.colors.cta.hover};
@@ -57,6 +69,8 @@ export const CtaButton = styled(Button)`
 
 export const SecondaryButton = styled(Button)`
   background: ${({ theme }) => theme.colors.secondary.standard};
+  ${getPrevBtnStyling}
+
   &:hover {
     background: ${({ theme }) => theme.colors.secondary.hover};
   }
