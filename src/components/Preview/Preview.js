@@ -39,7 +39,7 @@ const Preview = () => {
       <StyledAside>
         <ImgContainer
           className="img-container"
-          imageSrc="https://pbs.twimg.com/media/Ec6Zb5bWoAcIysH.jpg"
+          imageSrc="https://i.pinimg.com/originals/b0/b3/d4/b0b3d4c09062b62d1547f86d13bfb221.jpg"
         ></ImgContainer>
         <PreviewContact
           phone={contact.phone}
