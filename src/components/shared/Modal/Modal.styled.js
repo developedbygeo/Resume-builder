@@ -67,6 +67,12 @@ const previewStyle = css`
   margin: auto;
 `;
 
+const prevActionsStyling = css`
+  position: absolute;
+  bottom: -8%;
+  left: 2%;
+`;
+
 const getDivStyle = (props) => {
   if (props.backdrop) {
     return backdropStyle;
@@ -103,6 +109,9 @@ const DynamicDiv = styled.div`
         transform: scale(1);
       }
     }
+  }
+  & > .prevActions {
+    ${prevActionsStyling}
   }
   & > h2 {
     text-align: center;
