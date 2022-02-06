@@ -6,7 +6,7 @@ const PreviewList = ({ items, title }) => {
   });
 
   return (
-    <Container className="list" grid={true} contWidth="100%">
+    <Container grid={true} contWidth="100%">
       <div className="headerWrapper">
         <h4>{title}</h4>
       </div>
