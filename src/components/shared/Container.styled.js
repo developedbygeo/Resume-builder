@@ -20,8 +20,8 @@ const previewHeaderStyling = css`
   background: ${({ theme }) => theme.colors.previewSecondaryBg};
   color: ${({ theme }) => theme.colors.main};
   border-radius: 0.75rem;
-  padding: 0.25rem 0.4rem;
-  max-height: 3.5rem;
+  padding: 0.5rem;
+  height: 3.5rem;
 `;
 
 const previewInnerContGrid = css`
@@ -219,6 +219,7 @@ export const ImgContainer = styled.div`
   position: relative;
   background-image: url(${({ imageSrc }) => imageSrc || placeholder});
   background-size: cover;
+  background-position: center;
 `;
 
 const asideText = css`
@@ -273,9 +274,6 @@ export const StyledAside = styled.aside`
     p {
       ${asideText}
     }
-  }
-  & > .list {
-    grid-template-rows: repeat(5, 1fr);
   }
   .skills {
     width: 80%;
