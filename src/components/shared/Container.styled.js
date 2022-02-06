@@ -51,6 +51,8 @@ export const Container = styled.div`
   /* styling the personal info preview section */
   .personalMain {
     ${previewInnerContGrid}
+    min-height: 30vh;
+    overflow-y: auto;
     h1,
     h2 {
       text-align: center;
@@ -71,17 +73,33 @@ export const Container = styled.div`
   /* the wrapper & content of work experience / education divs */
   .infoContainer {
     grid-template-rows: 0.2fr auto;
+    gap: 0.5rem;
     height: 100%;
+    min-height: 20vh;
+    max-height: 30vh;
+    overflow-y: auto;
     width: 98%;
     & > div {
       ${previewInnerContGrid}
       gap: 0.5rem;
       ${({ theme }) => theme.mixins.maxContainer()};
+      position: relative;
       h3 {
         align-self: center;
         padding: 0.25rem;
         font-size: 2rem;
+        margin-top: 0.2rem;
       }
+    }
+    & > div::after {
+      content: '';
+      position: absolute;
+      bottom: -3%;
+      height: 0.15rem;
+      width: 25%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #ebebeb;
     }
     p {
       ${paragraphStyle};
@@ -205,7 +223,7 @@ export const ImgContainer = styled.div`
 
 const asideText = css`
   width: 100%;
-  font-size: 1.35rem;
+  font-size: 1.45rem;
   color: ${({ theme }) => theme.colors.main};
   overflow-wrap: anywhere;
 `;
@@ -213,6 +231,7 @@ const asideText = css`
 export const StyledAside = styled.aside`
   width: 100%;
   height: 100%;
+  min-height: 80vh;
   margin-top: auto;
   ${({ theme: { mixins } }) =>
     mixins.gridMixin('1fr', '0.7fr repeat(3, 1fr)', 'center', 'space-evenly')};
@@ -254,6 +273,9 @@ export const StyledAside = styled.aside`
     p {
       ${asideText}
     }
+  }
+  & > .list {
+    grid-template-rows: repeat(5, 1fr);
   }
   .skills {
     width: 80%;
