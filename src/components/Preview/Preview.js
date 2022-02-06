@@ -26,12 +26,12 @@ const Preview = () => {
     },
   } = useContext(InfoContext);
 
-  const renderedEmployment = allEmployment.map((info) => (
-    <PreviewExperience employment={info} />
+  const renderedEmployment = allEmployment.map((info, index) => (
+    <PreviewExperience key={index} employment={info} />
   ));
 
-  const renderedEducation = allEducation.map((info) => (
-    <PreviewExperience education={info} />
+  const renderedEducation = allEducation.map((info, index) => (
+    <PreviewExperience key={index} education={info} />
   ));
 
   return (
@@ -55,12 +55,10 @@ const Preview = () => {
         <Container grid={true} className="infoContainer">
           <h3 className="previewHeader">Work Experience</h3>
           {renderedEmployment}
-          {/* <PreviewExperience employment={employment} /> */}
         </Container>
         <Container grid={true} className="infoContainer">
           <h3 className="previewHeader">Education</h3>
           {renderedEducation}
-          {/* <PreviewExperience education={education} /> */}
         </Container>
       </section>
     </PreviewContainer>
