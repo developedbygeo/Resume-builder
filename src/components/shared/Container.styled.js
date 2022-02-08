@@ -218,6 +218,21 @@ export const ProgressFigcaption = styled.figcaption`
   max-width: 100%;
 `;
 
+const imageSizing = ({ imageSize }) => {
+  if (imageSize === 'large') {
+    return 'center 30%';
+  }
+  if (imageSize === 'medium') {
+    return 'center 25%';
+  }
+  if (imageSize === 'smallMed') {
+    return '100% 25%';
+  }
+  if (imageSize === 'small') {
+    return '100% 40%';
+  }
+};
+
 export const ImgContainer = styled.div`
   width: auto;
   height: auto;
@@ -225,7 +240,8 @@ export const ImgContainer = styled.div`
   position: relative;
   background-image: url(${({ imageSrc }) => imageSrc || placeholder});
   background-size: cover;
-  background-position: center;
+  background-repeat: no-repeat;
+  background-position: ${imageSizing};
 `;
 
 const asideText = css`
