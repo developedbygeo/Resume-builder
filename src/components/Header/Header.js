@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { DownloadButton, TrashButton } from './NavButtons';
-import { Nav, StyledHeader } from './Header.styled';
-import { Logo } from './Logo.styled';
+import { StyledHeader } from './Header.styled';
 import { LogoContainer } from '../shared/Container.styled';
 import logoImg from '../../assets/logo.svg';
 import Modal from '../shared/Modal/Modal';
@@ -48,14 +47,14 @@ const Header = () => {
     <StyledHeader>
       <div>
         <LogoContainer>
-          <Logo src={logoImg} alt="cv-builder-logo" draggable="false" />
+          <img src={logoImg} alt="cv-builder-logo" draggable="false" />
         </LogoContainer>
-        <Nav>
+        <nav>
           <div>
             <TrashButton onModalToggle={modalToggleHandler} />
             <DownloadButton onPreviewToggle={previewToggleHandler} />
           </div>
-        </Nav>
+        </nav>
       </div>
       {deleteModalView}
       {previewModalView}
