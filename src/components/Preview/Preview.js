@@ -18,6 +18,7 @@ const Preview = () => {
   const {
     defaultState: {
       information: {
+        imageInfo,
         personal,
         additional,
         contact,
@@ -34,13 +35,18 @@ const Preview = () => {
     <PreviewExperience key={index} education={info} />
   ));
 
+  const renderedPhoto = imageInfo && (
+    <ImgContainer
+      className="img-container"
+      imageSrc={imageInfo.path}
+      imageSize={imageInfo.size}
+    ></ImgContainer>
+  );
+
   return (
     <PreviewContainer>
       <StyledAside>
-        <ImgContainer
-          className="img-container"
-          imageSrc="https://i.pinimg.com/originals/b0/b3/d4/b0b3d4c09062b62d1547f86d13bfb221.jpg"
-        ></ImgContainer>
+        {renderedPhoto ? renderedPhoto : <div></div>}
         <PreviewContact
           phone={contact.phone}
           email={contact.email}
