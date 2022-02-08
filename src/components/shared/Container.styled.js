@@ -142,6 +142,12 @@ export const LogoContainer = styled.div`
   width: 100%;
   height: 100%;
   max-height: 10vh;
+  & > img {
+    width: auto;
+    height: auto;
+    max-height: 100%;
+    margin-top: 0.5rem;
+  }
 `;
 
 export const LayoutContainer = styled(Container)`
