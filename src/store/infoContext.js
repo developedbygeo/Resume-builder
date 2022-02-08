@@ -3,6 +3,7 @@ import _ from 'lodash';
 
 export const InfoContext = React.createContext({
   information: [],
+  addImage: () => {},
   addInformation: () => {},
   addPersonal: () => {},
   addAdditional: () => {},
@@ -16,6 +17,7 @@ export const InfoContext = React.createContext({
 const defaultState = {
   information: {
     imageExists: false,
+    imageInfo: null,
     personal: {
       firstName: '',
       lastName: '',
@@ -83,6 +85,14 @@ const informationReducer = (state = defaultState, action) => {
   } = currentSnapshot;
 
   switch (type) {
+    case 'ADD_IMAGE': {
+      currentSnapshot.information.imageExists = true;
+      currentSnapshot.information.imageInfo = {
+        path: payload.path,
+        size: payload.size,
+      };
+      return currentSnapshot;
+    }
     case 'ADD_PERSONAL': {
       _.assign(personal, payload);
       status.personal = true;
@@ -150,6 +160,9 @@ const InformationProvider = ({ children }) => {
     defaultState
   );
 
+  const addImageHandler = (path, size) => {
+    dispatchFn({ type: 'ADD_IMAGE', payload: path, size });
+  };
   const addPersonalHandler = (details) => {
     dispatchFn({ type: 'ADD_PERSONAL', payload: details });
   };
@@ -174,6 +187,7 @@ const InformationProvider = ({ children }) => {
 
   const defaultValues = {
     defaultState: currentState,
+    addImage: addImageHandler,
     addPersonal: addPersonalHandler,
     addAdditional: addAdditionalHandler,
     addContact: addContactHandler,
