@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import { devices } from '../shared/themeSettings';
 
 const defaultSettings = css`
   height: 100%;
@@ -21,6 +22,9 @@ export const StyledHeader = styled.header`
   nav {
     ${defaultSettings}
     margin: auto;
+    @media ${devices.desktop} {
+      max-width: 20rem;
+    }
     div {
       ${defaultSettings}
       ${({ theme: { mixins } }) => mixins.gridMixin('repeat(2, 1fr)', '1fr')};
