@@ -1,4 +1,5 @@
 import styled, { css, keyframes } from 'styled-components';
+import { devices } from '../themeSettings';
 
 const max = css`
   width: 100%;
@@ -42,6 +43,12 @@ const modalStyle = css`
   padding: ${({ modPadding }) => modPadding || '0'};
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
   animation: ${modalSlide} 400ms ease-in-out;
+  @media ${devices.desktop} {
+    top: 1%;
+    width: 35%;
+    left: 50%;
+    transform: translate(-50%);
+  }
 `;
 
 const modalDialogue = css`
@@ -57,6 +64,10 @@ const deleteStyle = css`
   ${({ theme: { mixins } }) =>
     mixins.flexMixin('space-between', 'space-between', 'column')};
   height: 40rem;
+  @media ${devices.desktop} {
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
 `;
 
 const previewStyle = css`
@@ -71,6 +82,10 @@ const prevActionsStyling = css`
   position: absolute;
   bottom: -8%;
   left: 2%;
+  @media ${devices.desktop} {
+    left: 0%;
+    width: 100%;
+  }
 `;
 
 const getDivStyle = (props) => {
