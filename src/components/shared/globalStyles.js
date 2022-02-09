@@ -17,14 +17,17 @@ html {
   @media ${devices.phoneStandard}{
     font-size: 41%;
   }
+  @media ${devices.desktop}{
+    font-size: 62.5%;
+  }
 }
 
 body {
   height: 100vh;
   width: 100vw;
   font-family: 'Open Sans', sans-serif;
-
 }
+
 main {
   width: 100vw;
   height: 90vh;
@@ -38,7 +41,14 @@ main {
   background: ${({ theme: { colors } }) => colors.header};
   height: 2rem;
 }
+
+@media ${devices.desktop}{
+    &>.layoutContainer{
+      width: 50%;
+    }
+  }
 }
+
 h1 {
   font-size: 2.8rem;
   font-weight: 700;
@@ -52,7 +62,6 @@ h3 {
   font-size: 2rem;
   font-weight: 500;
 }
-
 h1, h2, h3{
   font-family: 'Source Sans Pro', sans-serif;
   font-weight: 600;
