@@ -20,7 +20,7 @@ const App = () => {
           <Header />
           <main>
             <Progress />
-            <LayoutContainer>
+            <LayoutContainer className="layoutContainer">
               <Personal />
               <Contact />
               <Employment />
