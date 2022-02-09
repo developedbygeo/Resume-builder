@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import { devices } from '../shared/themeSettings';
 import placeholder from '../../assets/placeholder.png';
 
 const flexLayout = css`
@@ -51,8 +52,7 @@ export const Container = styled.div`
   /* styling the personal info preview section */
   .personalMain {
     ${previewInnerContGrid}
-    min-height: 30vh;
-    overflow-y: auto;
+    min-height: 25vh;
     h1,
     h2 {
       text-align: center;
@@ -61,6 +61,7 @@ export const Container = styled.div`
       grid-template-rows: 0.25fr 1fr;
       gap: 0.5rem;
       ${({ theme }) => theme.mixins.maxContainer()};
+      overflow-y: auto;
       & > p {
         ${paragraphStyle}
       }
@@ -134,6 +135,7 @@ export const PreviewContainer = styled(Container)`
 
     .desc {
       overflow-wrap: anywhere;
+      text-transform: initial;
     }
   }
 `;
@@ -155,6 +157,9 @@ export const LayoutContainer = styled(Container)`
   gap: 3rem;
   ${({ theme: { mixins } }) =>
     mixins.gridMixin('1fr', '0.1fr repeat(4, 1fr)', 'center', 'flex-start')}
+  &>.personal {
+    position: relative;
+  }
 `;
 
 export const StyledSection = styled.section`
@@ -182,8 +187,8 @@ export const StyledSection = styled.section`
 
   & .photoCont {
     position: absolute;
-    top: 14%;
-    right: 5%;
+    top: 0%;
+    right: 3%;
     input {
       height: 7rem;
       width: 7rem;
@@ -277,6 +282,9 @@ export const StyledAside = styled.aside`
     border-radius: 50%;
     border: 2px solid ${({ theme }) => theme.colors.previewSecondaryBg};
     margin: auto;
+    @media ${devices.desktop} {
+      width: 55%;
+    }
   }
   .headerWrapper {
     width: 95%;
