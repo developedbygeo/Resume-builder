@@ -29,9 +29,6 @@ const Header = () => {
     <Modal previewMenu="true" onDisable={previewToggleHandler}>
       <PreviewDialogue onDisable={previewToggleHandler} />
       <div className="actions prevActions">
-        <CtaButton title="Generate a PDF" prevBtn={true}>
-          Download now
-        </CtaButton>
         <SecondaryButton
           title="Back to Editing"
           onClick={previewToggleHandler}
@@ -39,6 +36,9 @@ const Header = () => {
         >
           Cancel
         </SecondaryButton>
+        <CtaButton title="Generate a PDF" prevBtn={true}>
+          Download now
+        </CtaButton>
       </div>
     </Modal>
   );
