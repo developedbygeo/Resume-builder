@@ -74,6 +74,7 @@ const previewStyle = css`
   min-height: 80vh;
   height: auto;
   max-height: 95vh;
+  max-width: 100vw;
   top: 0vh;
   margin: auto;
 `;
