@@ -156,12 +156,15 @@ export const PreviewContainer = styled(Container)`
 export const LogoContainer = styled.div`
   width: 100%;
   height: 100%;
-  max-height: 10vh;
+  ${({ theme: { mixins } }) =>
+    mixins.flexMixin('flex-start', 'flex-end', 'row')};
   & > img {
     width: auto;
     height: auto;
-    max-height: 100%;
-    margin-top: 0.5rem;
+    max-height: 10vh;
+    @media ${devices.phoneSmallLandscape} {
+      max-height: 14vh;
+    }
   }
 `;
 
@@ -295,6 +298,9 @@ export const StyledAside = styled.aside`
     border-radius: 50%;
     border: 2px solid ${({ theme }) => theme.colors.previewSecondaryBg};
     margin: auto;
+    @media ${devices.phoneSmall} {
+      width: 65%;
+    }
     @media ${devices.desktop} {
       width: 55%;
     }
