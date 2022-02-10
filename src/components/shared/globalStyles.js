@@ -14,8 +14,17 @@ const GlobalStyle = createGlobalStyle`
 
 html {
   font-size: 62.5%;
+  @media ${devices.phoneSmall}{
+    font-size: 25%;
+  }
   @media ${devices.phoneStandard}{
     font-size: 41%;
+  }
+  @media ${devices.phone}{
+    font-size: 50%;
+  }
+  @media ${devices.phoneSmallLandscape}{
+    font-size: 20%;
   }
   @media ${devices.desktop}{
     font-size: 53.5%;
@@ -46,6 +55,12 @@ main {
     &>.layoutContainer{
       width: 50%;
     }
+  }
+  @media ${devices.phoneSmallLandscape} {
+    &>.layoutContainer{
+      width: 50%;
+    }
+    
   }
 }
 
