@@ -39,6 +39,12 @@ const modalStyle = css`
     left: 50%;
     transform: translate(-50%);
   }
+  @media ${devices.phoneSmallLandscape} {
+    top: 1%;
+    width: 75%;
+    left: 50%;
+    transform: translate(-50%);
+  }
 `;
 
 const modalDialogue = css`
@@ -54,6 +60,9 @@ const deleteStyle = css`
   ${({ theme: { mixins } }) =>
     mixins.flexMixin('space-between', 'space-between', 'column')};
   height: 40rem;
+  @media ${devices.phoneSmallLandscape} {
+    width: 50%;
+  }
   @media ${devices.desktop} {
     top: 50%;
     transform: translate(-50%, -50%);
@@ -73,8 +82,22 @@ const prevActionsStyling = css`
   position: absolute;
   bottom: -8%;
   left: 2%;
-  @media ${devices.desktop} {
+  @media ${devices.phone} {
+    bottom: -10%;
+    left: 0;
+    width: 100%;
+  }
+  @media ${devices.phoneSmall} {
+    bottom: -10%;
+    width: 100%;
+  }
+  @media ${devices.phoneMedium} {
     left: 0%;
+    width: 100%;
+  }
+  @media ${devices.phoneSmallLandscape} {
+    left: 0;
+    bottom: calc(-10% - 4vh);
     width: 100%;
   }
 `;
@@ -127,6 +150,10 @@ const DynamicDiv = styled.div`
   }
   & > .svgCont {
     ${max}
+    @media ${devices.phoneSmallLandscape} {
+      height: 85%;
+    }
+
     & > svg {
       ${max}
     }
