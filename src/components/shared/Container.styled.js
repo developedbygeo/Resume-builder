@@ -80,6 +80,19 @@ export const Container = styled.div`
     max-height: 30vh;
     overflow-y: auto;
     width: 98%;
+    &::-webkit-scrollbar {
+      background-color: #f5f5f5;
+      width: 0.75rem;
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color: #dbdfe6;
+      border-radius: 1rem;
+    }
+    &::-webkit-scrollbar-thumb:active,
+    &::-webkit-scrollbar-thumb:hover {
+      background-color: ${({ theme }) => theme.colors.cta.standard};
+    }
+
     & > div {
       ${previewInnerContGrid}
       gap: 0.5rem;
