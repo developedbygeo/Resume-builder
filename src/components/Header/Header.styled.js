@@ -29,11 +29,8 @@ export const StyledHeader = styled.header`
       ${defaultSettings}
       ${({ theme: { mixins } }) => mixins.gridMixin('repeat(2, 1fr)', '1fr')};
       gap: 2rem;
-      align-items: flex-end;
+      align-items: center;
       justify-items: center;
-    }
-    & button {
-      margin-bottom: 2rem;
     }
   }
 `;
