@@ -6,22 +6,12 @@ const max = css`
   height: 100%;
 `;
 
-const modalSlide = keyframes`
+const houdiniAct = keyframes`
 from{
   opacity: 0;
-  transform: translateY(-3rem)
 }
 to{
   opacity: 1;
-  transform: translateY(0)
-}
-`;
-
-const documentDelete = keyframes`
-from{
-  opacity: 1;
-}to{
-  opacity: 0
 }
 `;
 
@@ -42,7 +32,7 @@ const modalStyle = css`
   background-color: white;
   padding: ${({ modPadding }) => modPadding || '0'};
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
-  animation: ${modalSlide} 400ms ease-in-out;
+  animation: ${houdiniAct} 400ms ease-in-out;
   @media ${devices.desktop} {
     top: 1%;
     width: 35%;
@@ -142,7 +132,7 @@ const DynamicDiv = styled.div`
     }
   }
   #document {
-    animation: ${documentDelete} 2s ease-in-out infinite alternate;
+    animation: ${houdiniAct} 2s ease-in-out infinite alternate;
   }
 
   & > .previewCont {
