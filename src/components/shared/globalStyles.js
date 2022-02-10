@@ -18,7 +18,7 @@ html {
     font-size: 41%;
   }
   @media ${devices.desktop}{
-    font-size: 62.5%;
+    font-size: 53.5%;
   }
 }
 
