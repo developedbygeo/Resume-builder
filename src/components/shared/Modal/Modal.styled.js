@@ -25,6 +25,18 @@ const backdropStyle = css`
   background-color: rgba(0, 0, 0, 0.65);
 `;
 
+const previewMargined = css`
+  top: 1%;
+  left: 50%;
+  transform: translate(-50%);
+`;
+
+const previewCentered = css`
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+`;
+
 const modalStyle = css`
   position: fixed;
   top: 20vh;
@@ -40,10 +52,21 @@ const modalStyle = css`
     transform: translate(-50%);
   }
   @media ${devices.phoneSmallLandscape} {
-    top: 1%;
     width: 75%;
-    left: 50%;
-    transform: translate(-50%);
+    ${previewMargined}
+  }
+  @media ${devices.tabletSmall} {
+    width: 85%;
+    ${previewMargined}
+  }
+  @media ${devices.phoneLandscape} {
+    width: 55%;
+  }
+  @media ${devices.tabletLandscape} {
+    width: 60%;
+  }
+  @media ${devices.desktop} {
+    width: 55%;
   }
 `;
 
@@ -62,10 +85,25 @@ const deleteStyle = css`
   height: 40rem;
   @media ${devices.phoneSmallLandscape} {
     width: 50%;
+    ${previewCentered}
+  }
+  @media ${devices.phoneLandscape} {
+    width: 50%;
+  }
+  @media ${devices.phoneStandard} {
+    ${previewCentered}
   }
   @media ${devices.desktop} {
     top: 50%;
     transform: translate(-50%, -50%);
+  }
+  @media ${devices.tabletSmall} {
+    width: 85%;
+    max-width: 40vw;
+    ${previewCentered}
+  }
+  @media ${devices.tabletPortrait} {
+    max-width: 60vw;
   }
 `;
 
@@ -82,6 +120,7 @@ const prevActionsStyling = css`
   position: absolute;
   bottom: -8%;
   left: 2%;
+  /* portrait */
   @media ${devices.phone} {
     bottom: -10%;
     left: 0;
@@ -91,14 +130,22 @@ const prevActionsStyling = css`
     bottom: -10%;
     width: 100%;
   }
+  @media ${devices.phoneStandard} {
+    left: 0%;
+    width: 100%;
+  }
   @media ${devices.phoneMedium} {
     left: 0%;
     width: 100%;
   }
+  /* landscape */
   @media ${devices.phoneSmallLandscape} {
     left: 0;
     bottom: calc(-10% - 4vh);
     width: 100%;
+  }
+  @media ${devices.tabletLandscape} {
+    bottom: calc(-7% - 4vh);
   }
 `;
 
@@ -152,6 +199,9 @@ const DynamicDiv = styled.div`
     ${max}
     @media ${devices.phoneSmallLandscape} {
       height: 85%;
+    }
+    @media ${devices.tabletSmall} {
+      max-height: 30rem;
     }
 
     & > svg {
