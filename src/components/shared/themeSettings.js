@@ -83,7 +83,7 @@ export const devices = {
   phoneLarge: `(min-width: ${themeSettings.breakpoints.portrait.phoneLarge.width}) and (min-height: ${themeSettings.breakpoints.portrait.phoneLarge.height})`,
   phablet: `(min-width: ${themeSettings.breakpoints.portrait.phablet})`,
   tabletSmall: `(min-width: ${themeSettings.breakpoints.portrait.tabletSmall})`,
-  tabletPortrait: `(min-width: ${themeSettings.breakpoints.portrait.tablet}) and (orientation: ${themeSettings.breakpoints.portrait.tablet.orientation})`,
+  tabletPortrait: `(min-width: ${themeSettings.breakpoints.portrait.tablet.width}) and (orientation: ${themeSettings.breakpoints.portrait.tablet.orientation})`,
   tabletWide: `(min-width: ${themeSettings.breakpoints.portrait.tabletWide})`,
   // landscape
   phoneSmallLandscape: `(min-width: ${themeSettings.breakpoints.landscape.phoneSmall.width}) and (orientation: ${themeSettings.breakpoints.landscape.phoneSmall.orientation})`,
