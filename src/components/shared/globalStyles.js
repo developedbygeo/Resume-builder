@@ -14,6 +14,7 @@ const GlobalStyle = createGlobalStyle`
 
 html {
   font-size: 62.5%;
+  /* portrait */
   @media ${devices.phoneSmall}{
     font-size: 25%;
   }
@@ -26,9 +27,32 @@ html {
   @media ${devices.phoneSmallLandscape}{
     font-size: 20%;
   }
-  @media ${devices.desktop}{
-    font-size: 53.5%;
+  @media ${devices.tabletSmall}{
+    font-size: 58%;
   }
+  @media ${devices.tabletPortrait}{
+    font-size: 62.5%;
+  }
+  @media ${devices.tabletWide}{
+    font-size: 70%;
+  }
+
+  /* landscape */
+  @media ${devices.phoneLandscape}{
+    font-size: 32%;
+  }
+  @media ${devices.phoneWideLandscape}{
+    font-size: 35%;
+  }
+  @media ${devices.tabletLandscape}{
+    font-size: 62.5%;
+  }
+  /* desktop */
+  @media ${devices.desktop}{
+    font-size: 65%;
+  }
+
+
 }
 
 body {
