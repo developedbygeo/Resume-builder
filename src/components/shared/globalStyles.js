@@ -14,6 +14,12 @@ const GlobalStyle = createGlobalStyle`
 
 html {
   font-size: 62.5%;
+  @media print {
+  overflow: hidden;
+  @page { 
+    font-size: 85%;
+    overflow: hidden; };
+}
   /* portrait */
   @media ${devices.phoneSmall}{
     font-size: 25%;
@@ -49,7 +55,7 @@ html {
   }
   /* desktop */
   @media ${devices.desktop}{
-    font-size: 65%;
+    font-size: 60%;
   }
 
 
