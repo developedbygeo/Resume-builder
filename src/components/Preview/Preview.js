@@ -1,5 +1,5 @@
 import useMultipleSlices from '../../hooks/useMultipleSlices';
-import { useContext } from 'react';
+import React, { useContext } from 'react';
 import { InfoContext } from '../../store/infoContext';
 import {
   StyledAside,
@@ -12,7 +12,7 @@ import PreviewList from './PreviewList';
 import PreviewMain from './PreviewMain';
 import PreviewExperience from './PreviewExperience';
 
-const Preview = () => {
+const Preview = (props, ref) => {
   const allEmployment = useMultipleSlices('employ');
   const allEducation = useMultipleSlices('edu');
   const {
@@ -44,7 +44,7 @@ const Preview = () => {
   );
 
   return (
-    <PreviewContainer>
+    <PreviewContainer ref={ref}>
       <StyledAside>
         {renderedPhoto ? renderedPhoto : <div></div>}
         <PreviewContact
@@ -71,4 +71,4 @@ const Preview = () => {
   );
 };
 
-export default Preview;
+export default React.forwardRef(Preview);
