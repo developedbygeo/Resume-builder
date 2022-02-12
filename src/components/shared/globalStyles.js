@@ -57,6 +57,12 @@ html {
   @media ${devices.desktop}{
     font-size: 60%;
   }
+  @media ${devices.desktopWide}{
+    font-size: 75%;
+  }
+  @media ${devices.fourK}{
+    font-size: 100%;
+  }
 
 
 }
