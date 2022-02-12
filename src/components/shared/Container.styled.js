@@ -163,13 +163,13 @@ export const LogoContainer = styled.div`
     mixins.flexMixin('flex-start', 'flex-end', 'row')};
   & > img {
     width: auto;
-    height: auto;
+    height: 13rem;
     max-height: 10vh;
     @media ${devices.phoneSmallLandscape} {
       max-height: 14vh;
     }
     @media ${devices.desktop} {
-      max-height: 10vh;
+      height: 10rem;
     }
   }
 `;
