@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import React, { useContext } from 'react';
 import { InfoContext } from '../../../store/infoContext';
 import { CtaButton, SecondaryButton } from '../Button.styled';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -34,10 +34,10 @@ export const ClearFormsDialogue = ({ onDisable }) => {
   );
 };
 
-export const PreviewDialogue = () => {
+export const PreviewDialogue = React.forwardRef((props, ref) => {
   return (
     <div className="previewCont">
-      <Preview />
+      <Preview ref={ref} />
     </div>
   );
-};
+});
