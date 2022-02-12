@@ -92,6 +92,9 @@ export const Container = styled.div`
     &::-webkit-scrollbar-thumb:hover {
       background-color: ${({ theme }) => theme.colors.cta.standard};
     }
+    @media print {
+      overflow-y: hidden;
+    }
 
     & > div {
       ${previewInnerContGrid}
@@ -165,6 +168,9 @@ export const LogoContainer = styled.div`
     @media ${devices.phoneSmallLandscape} {
       max-height: 14vh;
     }
+    @media ${devices.desktop} {
+      max-height: 10vh;
+    }
   }
 `;
 
@@ -237,6 +243,9 @@ export const ProgressFigcaption = styled.figcaption`
   font-weight: 400;
   width: inherit;
   max-width: 100%;
+  @media ${devices.desktop} {
+    font-size: 1.8rem;
+  }
 `;
 
 const imageSizing = ({ imageSize }) => {
