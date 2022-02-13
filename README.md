@@ -4,9 +4,18 @@
 
 A React-based, fully responsive resume builder. It is built around the idea of a custom template, which is populated with user-provided data. Each form field features its own validation logic and the app allows to both preview & download an interactive PDF. This project was a lovely chance to practise with Styled Components and custom React hooks.
 <br>
-<br>**Important Note**: **None** of the data provided leaves the client-side.
+<br>**None of the data provided is collected or stored. Your data never leave the client-side**.
+
+## Notes about printing and downloading the PDF
+
+**Important Note #1**: Since the PDF implementation is based on _React-to-PDF_, **certain limitations may apply browser and device-wise**. I would recommend accessing the app through Chrome for the time being.
 <br>
-<br>**Important Note #2**: Since the PDF implementation is based on _React-to-PDF_, certain limitations may apply browser and device-wise. I would recommend accessing the app through Chrome for the time being.
+<br>**Important Note #2**: Due to API limitations, printing settings cannot be set programmatically through the app. However, you can set them to be the following:
+
+- Layout: **Portrait**
+- Paper size: **A4**
+- Margins & Scale: **Default**
+- Background graphics: **Enabled**
 
 ## Installation
 
