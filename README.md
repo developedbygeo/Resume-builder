@@ -17,6 +17,8 @@ A React-based, fully responsive resume builder. It is built around the idea of a
 - Margins & Scale: **Default**
 - Background graphics: **Enabled**
 
+Additionally, please ensure that your **browser's zoom is set to default (100%)** before generating the document.
+
 ## Installation
 
 As this project was bootstrapped with React, the following scripts are available:
