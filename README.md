@@ -1,4 +1,4 @@
-# Task Planner
+# Resume Builder
 
 <img src='./public/sample.png' height='450px'/>
 
