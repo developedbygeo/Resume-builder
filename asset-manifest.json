@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.js": "/Resume-builder/static/js/main.bc8d13a5.js",
+    "main.js": "/Resume-builder/static/js/main.b85a0e21.js",
     "static/media/placeholder.png": "/Resume-builder/static/media/placeholder.2e4ef16d1cbc3b27f9d7.png",
     "static/media/deleteImg.svg": "/Resume-builder/static/media/deleteImg.b9a3d2c82a8977f57a862497237e3289.svg",
     "static/media/logo.svg": "/Resume-builder/static/media/logo.e475b2941a2a5629c7297eb016365553.svg",
     "index.html": "/Resume-builder/index.html",
-    "main.bc8d13a5.js.map": "/Resume-builder/static/js/main.bc8d13a5.js.map"
+    "main.b85a0e21.js.map": "/Resume-builder/static/js/main.b85a0e21.js.map"
   },
   "entrypoints": [
-    "static/js/main.bc8d13a5.js"
+    "static/js/main.b85a0e21.js"
   ]
 }
