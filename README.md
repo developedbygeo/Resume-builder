@@ -19,7 +19,7 @@ A React-based, fully responsive resume builder. It is built around the idea of a
 
 Additionally, please ensure that your **browser's zoom is set to default (100%)** before generating the document.
 
-**Important Note #3**: The recommended browser for this app is **Chrome**. There are a few known issues with Firefox, which cannot be controlled through the app. Regardless, if you decide to use Firefox, please \*\*enable 'Print Backgrounds' in the 'More Settings' drop-down menu.
+**Important Note #3**: The recommended browser for this app is **Chrome**. There are a few known issues with Firefox, which cannot be controlled through the app. Regardless, if you decide to use Firefox, please **enable 'Print Backgrounds' in the 'More Settings' drop-down menu**.
 
 ## Installation
 
