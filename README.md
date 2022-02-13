@@ -8,7 +8,7 @@ A React-based, fully responsive resume builder. It is built around the idea of a
 
 ## Notes about printing and downloading the PDF
 
-**Important Note #1**: Since the PDF implementation is based on _React-to-PDF_, **certain limitations may apply browser and device-wise**. I would recommend accessing the app through Chrome for the time being.
+**Important Note #1**: Since the PDF implementation is based on _React-to-PDF_, **certain limitations may apply browser and device-wise**. I would recommend accessing the app through **Chrome** for the time being.
 <br>
 <br>**Important Note #2**: Due to API limitations, printing settings cannot be set programmatically through the app. However, you can set them to be the following:
 
@@ -18,6 +18,8 @@ A React-based, fully responsive resume builder. It is built around the idea of a
 - Background graphics: **Enabled**
 
 Additionally, please ensure that your **browser's zoom is set to default (100%)** before generating the document.
+
+**Important Note #3**: The recommended browser for this app is **Chrome**. There are a few known issues with Firefox, which cannot be controlled through the app. Regardless, if you decide to use Firefox, please \*\*enable 'Print Backgrounds' in the 'More Settings' drop-down menu.
 
 ## Installation
 
