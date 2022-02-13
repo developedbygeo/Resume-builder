@@ -16,9 +16,8 @@ html {
   font-size: 62.5%;
   @media print {
   overflow: hidden;
-  font-size: 80%;
   @page { 
-  overflow: hidden; };
+    overflow: hidden; };
 }
   /* portrait */
   @media ${devices.phoneSmall}{
