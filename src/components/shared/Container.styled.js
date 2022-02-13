@@ -62,6 +62,7 @@ export const Container = styled.div`
       gap: 0.5rem;
       ${({ theme }) => theme.mixins.maxContainer()};
       overflow-y: auto;
+      overflow-wrap: anywhere;
       @media print {
         overflow-wrap: anywhere;
       }
