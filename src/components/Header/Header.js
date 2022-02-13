@@ -11,7 +11,7 @@ import ReactToPrint from 'react-to-print';
 const Header = () => {
   const [modalState, setModalState] = useState(false);
   const [previewState, setPreviewState] = useState(false);
-  const previewRef = useRef();
+  const previewRef = useRef(null);
 
   const modalToggleHandler = () => {
     setModalState((prevState) => !prevState);
