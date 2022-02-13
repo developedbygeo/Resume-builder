@@ -16,7 +16,7 @@ html {
   font-size: 62.5%;
   @media print {
   overflow: hidden;
-  font-size: 63%;
+  font-size: 50%;
   @page { 
     overflow: hidden; };
 }
