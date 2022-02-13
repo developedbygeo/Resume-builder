@@ -36,6 +36,7 @@
     ]
   },
   "devDependencies": {
-    "babel-plugin-styled-components": "^2.0.2"
+    "babel-plugin-styled-components": "^2.0.2",
+    "gh-pages": "^3.2.3"
   }
 }
