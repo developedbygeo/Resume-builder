@@ -1,5 +1,6 @@
 {
-  "name": "cv-builder",
+  "name": "resume-builder",
+  "homepage": "https://developedbygeo.github.io/Resume-builder/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
