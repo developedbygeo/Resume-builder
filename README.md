@@ -8,7 +8,7 @@ A React-based, fully responsive resume builder. It is built around the idea of a
 
 ## Notes about printing and downloading the PDF
 
-**Important Note #1**: Since the PDF implementation is based on _React-to-PDF_, **certain limitations may apply browser and device-wise**. I would recommend accessing the app through **Chrome** for the time being.
+**Important Note #1**: Since the PDF implementation is based on _React-to-PDF_, **certain limitations may apply browser and device-wise**. I would recommend accessing the app through **Chrome** or **Opera** for the time being.
 <br>
 <br>**Important Note #2**: Due to API limitations, printing settings cannot be set programmatically through the app. However, you can set them to be the following:
 
